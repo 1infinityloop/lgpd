@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Overpass+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="_ds/lgpd-play-design-system-cf0c1306-c4e2-4cc5-bccf-c1653a2108e0/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/lgpd-play-design-system-cf0c1306-c4e2-4cc5-bccf-c1653a2108e0/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/lgpd-play-design-system-cf0c1306-c4e2-4cc5-bccf-c1653a2108e0/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/lgpd-play-design-system-cf0c1306-c4e2-4cc5-bccf-c1653a2108e0/tokens/base.css">
+  <link rel="stylesheet" href="_ds/lgpd-play-design-system-cf0c1306-c4e2-4cc5-bccf-c1653a2108e0/components/fig-tokens.css">
+  <link rel="stylesheet" href="_ds/lgpd-play-design-system-cf0c1306-c4e2-4cc5-bccf-c1653a2108e0/styles.css">
+  <script src="_ds/lgpd-play-design-system-cf0c1306-c4e2-4cc5-bccf-c1653a2108e0/_ds_bundle.js"></script>
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;}
+    body{background:#ffffff;color:#212529;font-family:"Roboto",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased;}
+    p{margin:0;}
+    :root{--ink:#202a36;--green:#10b77f;--green-700:#047b56;--ease-out:cubic-bezier(.2,.8,.2,1);--ease-back:cubic-bezier(.3,1.5,.5,1);}
+    /* Figma buttons: Roboto Bold (DS injects its own .lgpd-btn rules later, hence the doubled class) */
+    button.lgpd-btn.lgpd-btn{font-family:"Roboto",sans-serif;font-weight:700;transition:transform .15s var(--ease-out),box-shadow .15s,background-color .15s;}
+    button.lgpd-btn.lgpd-btn:active{transform:translateY(1px);}
+    button:focus-visible,a:focus-visible{outline:3px solid rgba(16,183,127,.45);outline-offset:2px;}
+
+    /* ---------- Dashboard (Figma "Home") ---------- */
+    .card{background:#ffffff;border:1px solid #dee2e6;border-radius:12px;box-shadow:4px 4px 0 0 var(--ink);position:relative;overflow:hidden;transition:transform .2s var(--ease-out),box-shadow .2s var(--ease-out);}
+    .card.lift:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 0 var(--ink);}
+    .card.lift.warm:hover{box-shadow:6px 6px 0 0 #b24624;}
+    .rise{animation:rise .6s var(--ease-out) backwards;animation-delay:var(--d,0s);}
+    @keyframes rise{from{opacity:0;transform:translateY(14px);}}
+    .card-title{font-size:20px;font-weight:700;line-height:1.2;color:#212529;margin:0;}
+    .link-btn{border:1px solid transparent;background:transparent;padding:5px 9px;border-radius:4px;font:700 16px/1.5 "Roboto",sans-serif;color:#10b77f;cursor:pointer;}
+    .link-btn:hover{color:#0d9266;text-decoration:underline;text-underline-offset:3px;}
+
+    .nav{background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid #dee2e6;display:flex;align-items:center;justify-content:space-between;padding:16px 40px;position:sticky;top:0;z-index:20;}
+    .nav-left{display:flex;align-items:center;gap:32px;min-width:0;}
+    .nav-links{display:flex;align-items:center;gap:24px;}
+    .nav-link{display:flex;align-items:center;gap:8px;padding:8px 0;font-size:16px;line-height:1.5;color:#000000;text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s;}
+    .nav-link:hover{color:#047b56;}
+    .nav-link i{font-size:24px;line-height:1;transition:transform .2s var(--ease-back);}
+    .nav-link:hover i{transform:translateY(-2px);}
+    .nav-link.active{color:#10b77f;font-weight:700;border-bottom-color:#10b77f;}
+    .nav-link.active i{font-size:20px;}
+    .status-badge{display:flex;align-items:center;gap:8px;padding:6.3px 11.7px;border-radius:6px;color:#ffffff;font-weight:700;font-size:18px;line-height:1;}
+    .status-badge i{font-size:16px;}
+
+    .unit-card{border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:24px;}
+    .unit-badge{position:absolute;top:0;right:0;color:#ffffff;font-size:15px;line-height:1;padding:5.25px 16px;border-radius:0 16px 0 16px;}
+    .divider{height:1px;background:rgba(33,37,41,0.25);width:100%;}
+    .tabs{display:flex;align-items:flex-end;border-bottom:1px solid #dee2e6;align-self:flex-start;}
+    .tab{padding:9px 17px 8px;font-size:16px;line-height:1.5;border:1px solid transparent;border-bottom:none;border-radius:4px 4px 0 0;background:transparent;}
+    .tab.on{background:#ffffff;border-color:#dee2e6;color:#495057;margin-bottom:-1px;padding-bottom:9px;}
+    .tab.off{color:#047b56;}
+    .lesson{display:flex;align-items:center;gap:16px;padding:16px;border-radius:8px;transition:background-color .15s;cursor:pointer;}
+    .lesson:hover{background:#f8f9fa;}
+    .lesson:hover .lesson-ico{transform:scale(1.06);}
+    .lesson-ico{width:44px;height:44px;border-radius:1000px;background:#9eacc0;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#ffffff;font-size:22px;box-shadow:0 0 8px 0 rgba(52,121,233,0.4);transition:transform .2s var(--ease-back);}
+    .lesson-title{font-size:16px;line-height:1.2;color:#212529;}
+    .lesson-meta{display:flex;align-items:center;gap:12px;margin-top:8px;flex-wrap:wrap;}
+    .lesson-sub{font-size:16px;line-height:1.5;color:#6c757d;}
+    .hl-lesson{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:24px;border-radius:12px;background:#f0fdf7;box-shadow:0 0 0 4px rgba(16,183,127,0.25);animation:hlGlow 3s ease-in-out 1.2s infinite;}
+    @keyframes hlGlow{0%,100%{box-shadow:0 0 0 4px rgba(16,183,127,.25);}50%{box-shadow:0 0 0 6px rgba(16,183,127,.18);}}
+    .tag{font-family:"Overpass Mono",ui-monospace,monospace;font-weight:500;font-size:14px;line-height:1;padding:5px 8px 4px;border:1px solid;border-radius:4px;letter-spacing:0.02em;white-space:nowrap;}
+    .tag-aprender{background:#e0cffc;border-color:#3a2fb2;color:#3a2fb2;}
+    .tag-fixar{background:#fff6eb;border-color:#e4570c;color:#e4570c;}
+    .tag-aprofundar{background:#f2f7ff;border-color:#1559ea;color:#1559ea;}
+    .tag-aplicar{background:#fdf2f8;border-color:#da2576;color:#da2576;}
+
+    .medal{width:64px;height:64px;border-radius:32px;display:flex;align-items:center;justify-content:center;color:#ffffff;font-size:30px;filter:drop-shadow(0 3px 5px rgba(0,0,0,0.12));flex-shrink:0;transition:transform .25s var(--ease-back);}
+    .medal:hover{transform:translateY(-3px) rotate(-8deg) scale(1.06);}
+    .g-green{background:linear-gradient(135deg,#f6c45a 0%,#10b77f 100%);}
+    .g-orange{background:linear-gradient(135deg,#f6c45a 0%,#fd7e14 100%);}
+    .g-purple{background:linear-gradient(135deg,#f6c45a 0%,#7b61ff 100%);}
+    .bar{background:#e9ecef;border-radius:4px;overflow:hidden;}
+    .bar > span{display:block;height:100%;background:#10b77f;transform-origin:left center;animation:barGrow 1s var(--ease-out) .4s backwards;}
+    @keyframes barGrow{from{transform:scaleX(0);}}
+    .bar > span.stripes{background:#10b77f url('assets/progress-striped.svg') repeat-x left center / 128px 100%;animation:barGrow 1s var(--ease-out) .4s backwards,stripeMove 3s linear infinite;}
+    @keyframes stripeMove{to{background-position:128px center;}}
+
+    .day{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;}
+    .day-box{width:32px;height:32px;border-radius:9.787px;border:2.141px solid #a1a1aa;opacity:0.8;}
+    .day-lbl{font-weight:700;font-size:16px;line-height:1.5;}
+    .day-today{animation:todayNudge 2.4s ease-in-out 1.5s infinite;}
+    @keyframes todayNudge{0%,80%,100%{transform:none;}85%{transform:rotate(-8deg);}90%{transform:rotate(8deg);}95%{transform:rotate(-4deg);}}
+    .mile{flex:1;border-radius:6px;padding:9px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;}
+    .mile b{font-weight:600;font-size:14px;line-height:1;}
+    .mile span{font-size:12px;line-height:1.5;}
+
+    .rank-row{display:flex;align-items:center;gap:12px;padding:0 16px;height:46px;border-radius:8px;transition:background-color .15s;}
+    .rank-row:hover{background:#f8f9fa;}
+    .rank-pos{width:13px;font-weight:500;font-size:16px;line-height:22px;color:#1a1a1a;}
+    .rank-av{width:34px;height:34px;border-radius:1000px;border:1px solid #1a1a1a;object-fit:cover;flex-shrink:0;}
+    .rank-name{flex:1;min-width:0;font-size:16px;line-height:1.5;color:#1a1a1a;display:flex;align-items:center;gap:8px;}
+    .rank-xp{font-weight:700;font-size:16px;line-height:1.5;color:#1a1a1a;white-space:nowrap;}
+
+    /* ---------- Lex ---------- */
+    .lex-panel{position:fixed;right:31px;bottom:21px;z-index:45;width:min(388px,calc(100vw - 32px));height:min(548px,calc(100vh - 100px));background:#ffffff;border:1px solid #e3e7ec;border-radius:20px;box-shadow:0 22px 60px 0 rgba(12,29,85,0.24);display:flex;flex-direction:column;overflow:hidden;font-family:"Inter",system-ui,sans-serif;transform-origin:bottom right;animation:panelIn .35s var(--ease-out) backwards;}
+    @keyframes panelIn{from{opacity:0;transform:translateY(12px) scale(.94);}}
+    .lex-hbtn{width:28px;height:28px;border-radius:8px;border:none;background:rgba(255,255,255,0.22);color:#ffffff;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;font-size:14px;transition:background-color .15s;}
+    .lex-hbtn:hover{background:rgba(255,255,255,0.34);}
+    .lex-orb{border-radius:50%;background:radial-gradient(circle at center,#34d19b 0%,#22c48d 50%,#10b77f 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .lex-act{width:24px;height:24px;border:none;background:transparent;border-radius:6px;color:#8a949e;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;font-size:11.5px;}
+    .lex-act:hover{background:#eef1f4;color:#2a3138;}
+    .lex-fab{position:fixed;right:24px;bottom:24px;z-index:45;width:62px;height:62px;border:none;padding:0;cursor:pointer;animation:pulseCalm 3.2s ease-in-out infinite;transition:transform .2s var(--ease-back);}
+    .lex-fab:hover{transform:scale(1.08) rotate(-4deg);}
+    @keyframes pulseCalm{0%,100%{box-shadow:0 10px 24px rgba(12,29,85,0.24),0 0 0 0 rgba(16,183,127,0.35);}50%{box-shadow:0 10px 24px rgba(12,29,85,0.24),0 0 0 10px rgba(16,183,127,0);}}
+    @keyframes ringPulse{0%{box-shadow:0 0 0 0 rgba(16,183,127,0.55);}100%{box-shadow:0 0 0 10px rgba(16,183,127,0);}}
+
+    .menu{position:absolute;top:46px;right:0;width:272px;background:#ffffff;border:1px solid var(--ink);border-radius:12px;box-shadow:4px 4px 0 0 var(--ink);padding:6px;z-index:30;transform-origin:top right;animation:menuIn .2s var(--ease-out) backwards;}
+    @keyframes menuIn{from{opacity:0;transform:translateY(-6px) scale(.97);}}
+    .menu-item{width:100%;display:flex;align-items:center;gap:10px;padding:9px 10px;border:none;background:transparent;border-radius:6px;font:400 15px/1.4 "Roboto",sans-serif;color:#212529;cursor:pointer;text-align:left;}
+    .menu-item:hover{background:#f0fdf7;}
+    .menu-item i{font-size:16px;color:#6c757d;}
+
+    /* ---------- Tour ---------- */
+    .spot{position:fixed;z-index:60;pointer-events:none;transition:all .35s var(--ease-out);}
+    .spot::after{content:"";position:absolute;inset:-3px;border-radius:inherit;animation:spotPulse 1.8s ease-out infinite;}
+    @keyframes spotPulse{0%{box-shadow:0 0 0 0 rgba(16,183,127,.55);}100%{box-shadow:0 0 0 14px rgba(16,183,127,0);}}
+    .tpop{position:fixed;z-index:70;background:#ffffff;border:1px solid var(--ink);border-radius:14px;box-shadow:5px 5px 0 0 var(--ink);padding:18px 20px 16px;transition:top .35s var(--ease-out),left .35s var(--ease-out),opacity .15s;}
+    .tp-a{animation:tpInA .4s var(--ease-out) backwards;}
+    .tp-b{animation:tpInB .4s var(--ease-out) backwards;}
+    @keyframes tpInA{from{opacity:0;transform:translateY(8px) scale(.97);}}
+    @keyframes tpInB{from{opacity:0;transform:translateY(8px) scale(.97);}}
+    .tp-ico{width:34px;height:34px;border-radius:10px;background:#10b77f;border:1px solid var(--ink);box-shadow:2px 2px 0 var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#ffffff;font-size:16px;}
+    .tp-seg{flex:1;height:6px;border:none;padding:0;border-radius:4px;cursor:pointer;background:#e9ecef;overflow:hidden;position:relative;}
+    .tp-seg > span{position:absolute;inset:0;background:#10b77f;border-radius:inherit;transform-origin:left;transition:transform .4s var(--ease-out);}
+    .kbd{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 5px;border:1px solid #ced4da;border-bottom-width:2px;border-radius:5px;font:600 11px "Roboto",sans-serif;color:#495057;background:#f8f9fa;}
+
+    /* ---------- Toast ---------- */
+    .toast{position:fixed;left:50%;bottom:24px;z-index:80;max-width:calc(100vw - 32px);background:#0c1d55;border-radius:999px;filter:drop-shadow(0 8px 10px rgba(0,0,0,0.25));padding:6px 6px 6px 6px;display:flex;align-items:center;gap:10px;font-family:'Inter',sans-serif;transform:translateX(-50%);animation:toastIn .45s var(--ease-back) backwards;}
+    @keyframes toastIn{from{opacity:0;transform:translate(-50%,24px) scale(.9);}}
+
+    /* ---------- Carrossel de apresentação ---------- */
+    .wc-overlay{position:fixed;inset:0;z-index:90;background:rgba(12,29,85,.52);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:16px;animation:fade .3s ease backwards;}
+    @keyframes fade{from{opacity:0;}}
+    .wc{width:min(600px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#ffffff;border:1px solid var(--ink);border-radius:22px;box-shadow:6px 6px 0 0 var(--ink);display:flex;flex-direction:column;outline:none;animation:dialogIn .5s var(--ease-back) backwards;}
+    @keyframes dialogIn{from{opacity:0;transform:translateY(24px) scale(.94);}}
+    .wc-stage{position:relative;height:318px;flex-shrink:0;overflow:hidden;border-bottom:1px solid var(--ink);border-radius:21px 21px 0 0;transition:background-color .6s ease;touch-action:pan-y;user-select:none;}
+    .wc-stage::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(32,42,54,.13) 1px,transparent 1.3px);background-size:18px 18px;pointer-events:none;}
+    .wc-stage.dark::before{background-image:radial-gradient(rgba(255,255,255,.16) 1px,transparent 1.3px);}
+    .wc-top{position:absolute;top:14px;left:16px;right:14px;display:flex;align-items:center;gap:14px;z-index:5;}
+    .segs{flex:1;display:flex;gap:6px;}
+    .seg{flex:1;height:5px;border:none;padding:0;border-radius:5px;background:rgba(32,42,54,.16);overflow:hidden;cursor:pointer;position:relative;}
+    .seg::before{content:"";position:absolute;inset:-8px 0;}
+    .dark .seg{background:rgba(255,255,255,.28);}
+    .seg > span{display:block;height:100%;width:0;background:#202a36;border-radius:inherit;}
+    .dark .seg > span{background:#ffffff;}
+    .seg.done > span{width:100%;}
+    .seg.run > span{animation:segFill 7s linear forwards;}
+    .wc:hover .seg.run > span{animation-play-state:paused;}
+    @keyframes segFill{from{width:0;}to{width:100%;}}
+    .wc-close{width:34px;height:34px;border-radius:50%;background:#ffffff;border:1px solid var(--ink);box-shadow:2px 2px 0 var(--ink);display:flex;align-items:center;justify-content:center;cursor:pointer;color:#212529;font-size:14px;flex-shrink:0;transition:transform .15s var(--ease-out),box-shadow .15s;}
+    .wc-close:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink);}
+    .wc-scene{position:absolute;inset:40px 0 0 0;display:flex;align-items:center;justify-content:center;}
+    .enter-next .wc-scene{animation:sceneNext .55s var(--ease-out) backwards;}
+    .enter-prev .wc-scene{animation:scenePrev .55s var(--ease-out) backwards;}
+    @keyframes sceneNext{from{opacity:0;transform:translateX(56px);}}
+    @keyframes scenePrev{from{opacity:0;transform:translateX(-56px);}}
+    .wc-body{padding:22px 26px 20px;display:flex;flex-direction:column;gap:18px;}
+    .copy-a{animation:copyA .5s var(--ease-out) .08s backwards;}
+    .copy-b{animation:copyB .5s var(--ease-out) .08s backwards;}
+    @keyframes copyA{from{opacity:0;transform:translateY(10px);}}
+    @keyframes copyB{from{opacity:0;transform:translateY(10px);}}
+    .eyebrow{display:inline-flex;align-items:center;gap:6px;font:700 12px/1 "Roboto",sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid currentColor;}
+    .wc-title{font-size:26px;font-weight:700;line-height:1.15;color:#212529;margin:12px 0 8px;letter-spacing:-.01em;}
+    .wc-text{font-size:16px;line-height:1.55;color:#495057;text-wrap:pretty;}
+    .wc-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+    .wc-skip{border:none;background:transparent;padding:6px 0;font:400 14px "Roboto",sans-serif;color:#6c757d;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
+    .wc-skip:hover{color:#212529;}
+
+    /* peças compartilhadas das cenas */
+    .pop{animation:popIn .55s var(--ease-back) backwards;animation-delay:var(--d,0s);}
+    @keyframes popIn{from{opacity:0;transform:scale(.5) translateY(8px);}}
+    .slide-up{animation:slideUp .5s var(--ease-out) backwards;animation-delay:var(--d,0s);}
+    @keyframes slideUp{from{opacity:0;transform:translateY(16px);}}
+    .floaty{animation:floaty 4.2s ease-in-out infinite;animation-delay:var(--fd,0s);}
+    @keyframes floaty{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-9px) rotate(calc(var(--r,0deg) * -1));}}
+    .twinkle{position:absolute;animation:twinkle 2.6s ease-in-out infinite;animation-delay:var(--d,0s);}
+    @keyframes twinkle{0%,100%{opacity:.3;transform:scale(.6) rotate(0);}50%{opacity:1;transform:scale(1.1) rotate(25deg);}}
+    .ink-card{background:#ffffff;border:1px solid var(--ink);border-radius:16px;box-shadow:4px 4px 0 0 var(--ink);}
+    .bubble-ico{width:54px;height:54px;border-radius:16px;background:#ffffff;border:1px solid var(--ink);box-shadow:3px 3px 0 var(--ink);display:flex;align-items:center;justify-content:center;font-size:24px;}
+
+    /* cena 1: lições */
+    .m-row{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:12px;}
+    .m-ico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:17px;flex-shrink:0;position:relative;}
+    .eq{display:flex;gap:2.5px;align-items:flex-end;height:16px;}
+    .eq i{display:block;width:3px;height:100%;background:#fff;border-radius:2px;transform-origin:bottom;animation:eq 1s ease-in-out infinite;}
+    .eq i:nth-child(2){animation-delay:-.35s;}
+    .eq i:nth-child(3){animation-delay:-.7s;}
+    .eq i:nth-child(4){animation-delay:-.2s;}
+    @keyframes eq{0%,100%{transform:scaleY(.3);}50%{transform:scaleY(1);}}
+    .mini-bar{height:6px;border-radius:6px;background:#d6efe4;overflow:hidden;width:120px;max-width:100%;}
+    .m-row p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .mini-bar span{display:block;height:100%;width:45%;background:#10b77f;border-radius:inherit;transform-origin:left;animation:barGrow 1.2s var(--ease-out) 1s backwards;}
+    .xp-float{position:absolute;right:10px;top:4px;opacity:0;animation:xpFloat 1.8s var(--ease-out) 1.1s;pointer-events:none;}
+    @keyframes xpFloat{0%{opacity:0;transform:translateY(8px) scale(.8);}20%{opacity:1;transform:translateY(0) scale(1);}70%{opacity:1;}100%{opacity:0;transform:translateY(-30px);}}
+    .xp-chip{background:#10b77f;color:#fff;border:1px solid var(--ink);border-radius:999px;padding:3px 8px;font:700 12px "Roboto",sans-serif;white-space:nowrap;box-shadow:2px 2px 0 var(--ink);}
+    .check-pop{position:absolute;right:-4px;bottom:-4px;width:18px;height:18px;border-radius:50%;background:#10b77f;border:2px solid #fff;color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;}
+
+    /* cena 2: ranking */
+    .rk-list{position:relative;height:176px;}
+    .rk{position:absolute;left:28px;right:0;height:38px;display:flex;align-items:center;gap:10px;padding:0 10px;border-radius:10px;animation:rkMove .75s cubic-bezier(.3,.9,.3,1.08) 1.1s backwards;}
+    @keyframes rkMove{from{transform:translateY(var(--from,0));}}
+    .rk-num{position:absolute;left:4px;width:18px;height:38px;display:flex;align-items:center;justify-content:center;font:600 14px "Roboto",sans-serif;color:#495057;}
+    .rk-av{width:26px;height:26px;border-radius:50%;border:1px solid #1a1a1a;object-fit:cover;flex-shrink:0;}
+    .rk-name{flex:1;min-width:0;font-size:14px;color:#1a1a1a;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+    .rk-xp{font:700 14px "Roboto",sans-serif;color:#1a1a1a;white-space:nowrap;}
+    @property --xp{syntax:'<integer>';initial-value:290;inherits:false;}
+    .xp-count{--xp:290;counter-reset:xp var(--xp);animation:xpUp 1s var(--ease-out) .3s backwards;}
+    .xp-count::after{content:"1." counter(xp) " xp";}
+    @keyframes xpUp{from{--xp:210;}}
+    .me-row{background:#f2f7ff;border:1.5px solid #3479e9;z-index:2;box-shadow:0 6px 14px rgba(52,121,233,.18);}
+
+    /* cena 3: medalhas */
+    .ring-spin{position:absolute;inset:-5px;border-radius:50%;background:conic-gradient(#7620c1,#d8b4fe,#7620c1,#c084fc,#7620c1);animation:spin 3.5s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .unlock{position:relative;width:60px;height:60px;}
+    .unlock .locked{position:absolute;inset:0;border-radius:50%;background:#e9ecef;border:2px dashed #adb5bd;display:flex;align-items:center;justify-content:center;color:#adb5bd;font-size:22px;opacity:0;animation:lockOut 1.5s ease both;}
+    @keyframes lockOut{0%,70%{opacity:1;transform:scale(1);}100%{opacity:0;transform:scale(.6) rotate(-20deg);}}
+    .unlock .medal{position:absolute;inset:0;width:60px;height:60px;animation:medalIn .6s var(--ease-back) 1.3s backwards;}
+    @keyframes medalIn{from{opacity:0;transform:scale(.2) rotate(-40deg);}}
+    .burst{position:absolute;inset:0;border-radius:50%;border:3px solid #f6c45a;opacity:0;animation:burst .8s ease-out 1.35s;pointer-events:none;}
+    @keyframes burst{from{opacity:1;transform:scale(.8);}to{opacity:0;transform:scale(2.2);}}
+    .confetti{position:absolute;left:50%;top:50%;width:7px;height:7px;border-radius:2px;opacity:0;animation:confetti .9s var(--ease-out) 1.35s;pointer-events:none;}
+    @keyframes confetti{0%{opacity:1;transform:translate(-50%,-50%) rotate(0);}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y))) rotate(220deg);}}
+    .new-chip{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:#dc3545;color:#fff;border:1px solid var(--ink);border-radius:999px;font:700 10px "Roboto",sans-serif;letter-spacing:.06em;padding:2px 7px;box-shadow:2px 2px 0 var(--ink);animation:chipIn .45s var(--ease-back) 1.55s backwards;white-space:nowrap;}
+    @keyframes chipIn{from{opacity:0;transform:translate(-50%,6px) scale(.6);}}
+
+    /* cena 4: Lex */
+    .bob{animation:bob 2.6s ease-in-out infinite;}
+    @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-4px);}}
+    .typing{position:absolute;left:0;top:0;display:flex;gap:4px;align-items:center;background:#fff;border:1px solid #e7ebf0;border-radius:15px 15px 15px 4px;padding:11px 13px;opacity:0;animation:typingShow 1.3s ease .8s;}
+    @keyframes typingShow{0%{opacity:0;transform:translateY(6px);}12%,88%{opacity:1;transform:none;}100%{opacity:0;}}
+    .typing i{display:block;width:6px;height:6px;border-radius:50%;background:#9eacc0;animation:dot 1s ease-in-out infinite;}
+    .typing i:nth-child(2){animation-delay:.15s;}
+    .typing i:nth-child(3){animation-delay:.3s;}
+    @keyframes dot{0%,100%{transform:translateY(0);opacity:.5;}50%{transform:translateY(-4px);opacity:1;}}
+    .qr{border:1px solid #10b77f;color:#047b56;background:#fff;border-radius:999px;padding:5px 10px;font:500 12px "Inter",sans-serif;white-space:nowrap;}
+
+    /* cena 5: tour */
+    .mini-dash{position:relative;width:min(440px,calc(100% - 40px));height:196px;background:#fff;border:1px solid var(--ink);border-radius:14px;box-shadow:4px 4px 0 var(--ink);overflow:hidden;}
+    .md{position:absolute;border-radius:7px;border:1px solid #dee2e6;background:#fff;box-shadow:2px 2px 0 var(--ink);}
+    .md-line{height:5px;border-radius:3px;background:#dee2e6;margin:7px 8px 0;}
+    .spot-mini{position:absolute;border-radius:9px;box-shadow:0 0 0 2.5px #10b77f,0 0 0 600px rgba(32,42,54,.42);animation:spotMove 10s var(--ease-out) infinite;left:3%;top:8px;width:94%;height:22px;}
+    @keyframes spotMove{
+      0%,16%{left:3%;top:8px;width:94%;height:22px;}
+      25%,41%{left:3%;top:76px;width:58%;height:110px;}
+      50%,66%{left:64%;top:136px;width:33%;height:50px;}
+      75%,91%{left:64%;top:78px;width:33%;height:50px;}
+      100%{left:3%;top:8px;width:94%;height:22px;}
+    }
+    .pop-mini{position:absolute;width:112px;background:#fff;border:1px solid var(--ink);border-radius:8px;box-shadow:2px 2px 0 var(--ink);padding:7px 8px;display:flex;flex-direction:column;gap:4px;animation:popMove 10s var(--ease-out) infinite;left:34%;top:38px;}
+    @keyframes popMove{
+      0%,16%{left:34%;top:38px;}
+      25%,41%{left:63%;top:92px;}
+      50%,66%{left:34%;top:128px;}
+      75%,91%{left:34%;top:70px;}
+      100%{left:34%;top:38px;}
+    }
+    .cursor{position:absolute;font-size:18px;color:#212529;filter:drop-shadow(1px 1px 0 #fff);animation:cursorMove 10s var(--ease-out) infinite;left:60%;top:70px;}
+    @keyframes cursorMove{
+      0%,10%{left:60%;top:70px;transform:scale(1);}
+      13%{transform:scale(.85);}16%{transform:scale(1);}
+      25%,35%{left:86%;top:124px;}
+      38%{transform:scale(.85);}41%{transform:scale(1);}
+      50%,60%{left:58%;top:160px;}
+      63%{transform:scale(.85);}66%{transform:scale(1);}
+      75%,85%{left:58%;top:102px;}
+      88%{transform:scale(.85);}91%{transform:scale(1);}
+      100%{left:60%;top:70px;}
+    }
+
+    .dash{max-width:1440px;margin:0 auto;padding:24px 40px 120px;display:grid;grid-template-columns:minmax(0,861fr) minmax(0,475fr);gap:24px;align-items:start;}
+    @media (max-width:1180px){ .nav-links .nl-opt{display:none!important;} }
+    @media (max-width:1000px){
+      .dash{grid-template-columns:1fr;padding:20px 16px 120px;}
+      .nav{padding:12px 16px;}
+      .nav-links{display:none!important;}
+    }
+    @media (max-width:560px){
+      .lesson-right{display:none!important;}
+      .lex-panel{right:16px;bottom:16px;}
+      .nav-logo{width:104px!important;height:auto!important;margin-bottom:-4px!important;}
+      .nav-right{gap:12px!important;}
+      .nav-right .status-badge{font-size:15px;padding:5px 8px;gap:5px;}
+      .wc-stage{height:300px;}
+      .wc-body{padding:18px 18px 16px;}
+      .wc-title{font-size:22px;}
+      .hide-xs{display:none!important;}
+      .wc-foot{gap:8px;}
+      .wc-spacer{display:none;}
+      .wc-foot button.lgpd-btn{flex:1;justify-content:center;}
+      .wc-skip{order:3;width:100%;text-align:center;}
+    }
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{animation-duration:.001ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.001ms!important;}
+      .seg.run > span{animation:none!important;width:100%;}
+    }
+  </style>
+</helmet>
+
+<div style="min-height:100vh;position:relative;">
+  <div aria-hidden="true" style="position:absolute;left:0;right:0;top:51px;height:511px;background:linear-gradient(180deg,#f0fdf7 3.033%,rgba(255,255,255,0) 100%);pointer-events:none;"></div>
+
+  <nav class="nav">
+    <div class="nav-left">
+      <img class="nav-logo" src="assets/logo-tjam-play.svg" alt="TJAM Play" width="153" height="27" style="display:block;flex-shrink:0;margin-bottom:-7px;">
+      <div class="nav-links" data-tour="nav">
+        <a href="#" class="nav-link active"><i class="bi bi-house-fill"></i> Início</a>
+        <a href="#" class="nav-link"><i class="bi bi-book-fill"></i> Unidades</a>
+        <a href="#" class="nav-link nl-opt"><i class="bi bi-shield-fill"></i> Desafio Semanal</a>
+        <a href="#" class="nav-link"><i class="bi bi-trophy-fill"></i> Ranking</a>
+        <a href="#" class="nav-link nl-opt"><i class="bi bi-people-fill"></i> Amigos</a>
+      </div>
+    </div>
+    <div class="nav-right" style="display:flex;align-items:center;gap:24px;flex-shrink:0;">
+      <div class="nav-right" style="display:flex;align-items:center;gap:16px;">
+        <div class="status-badge" style="background:#10b77f;"><i class="bi bi-lightning-charge-fill"></i> 300 XP</div>
+        <div class="status-badge" style="background:#dc3545;"><i class="bi bi-suit-heart-fill"></i> 5</div>
+      </div>
+      <div style="position:relative;">
+        <button onClick="{{ toggleProfile }}" aria-label="Perfil" aria-expanded="{{ profileOpen }}" style="padding:0;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;gap:8px;width:72px;color:#212529;">
+          <img src="assets/avatar-nav.png" alt="" width="32" height="32" style="width:32px;height:32px;border-radius:999px;object-fit:cover;background:#ffffff;display:block;">
+          <i class="bi bi-chevron-down" style="font-size:16px;transition:transform .2s;transform:rotate({{ chevronRot }}deg);"></i>
+        </button>
+        <sc-if value="{{ helpHint }}" hint-placeholder-val="{{ false }}">
+          <span style="position:absolute;top:-3px;left:22px;width:12px;height:12px;border-radius:50%;background:#10b77f;border:2px solid #ffffff;animation:ringPulse 1.6s ease-out infinite;pointer-events:none;"></span>
+        </sc-if>
+        <sc-if value="{{ profileOpen }}" hint-placeholder-val="{{ false }}">
+          <div data-tour="perfilmenu" class="menu">
+            <div style="display:flex;align-items:center;gap:12px;padding:10px 10px 12px;border-bottom:1px solid #dee2e6;margin-bottom:6px;">
+              <span style="width:40px;height:40px;border-radius:50%;background:#cdeee1;color:#0a6e4c;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;box-shadow:0 0 0 2px #ffffff,0 0 0 4px #7620c1;">KO</span>
+              <div style="min-width:0;">
+                <div style="font-size:15px;font-weight:700;color:#212529;">Kátia Oliveira</div>
+                <div style="font-size:13px;color:#6c757d;">Nível 1 · Liga Recruta</div>
+              </div>
+            </div>
+            <button class="menu-item"><i class="bi bi-person"></i> Meu perfil</button>
+            <button class="menu-item"><i class="bi bi-gear"></i> Configurações de perfil</button>
+            <button class="menu-item"><i class="bi bi-universal-access"></i> Acessibilidade</button>
+            <button class="menu-item"><i class="bi bi-bell"></i> Notificações</button>
+            <div style="height:1px;background:#dee2e6;margin:6px 4px;"></div>
+            <div data-tour="tourmenu" style="display:flex;flex-direction:column;">
+              <button onClick="{{ openWelcome }}" class="menu-item"><i class="bi bi-collection-play" style="color:#047b56;"></i> Ver apresentação</button>
+              <button onClick="{{ tourFromMenu }}" class="menu-item"><i class="bi bi-signpost-split" style="color:#047b56;"></i> <span style="flex:1;">{{ tourMenuLabel }}</span></button>
+            </div>
+            <div style="height:1px;background:#dee2e6;margin:6px 4px;"></div>
+            <button class="menu-item"><i class="bi bi-box-arrow-right"></i> Sair</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </nav>
+
+  <sc-if value="{{ menuBackdrop }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMenus }}" style="position:fixed;inset:0;z-index:15;"></div>
+  </sc-if>
+
+  <main class="dash" style="position:relative;">
+
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0;">
+      <div class="card rise" style="--d:.02s;border-color:#a046f6;border-radius:16px;padding:24px;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;background:linear-gradient(95deg,#faf5ff 0%,#f2e5ff 100%);">
+        <div style="display:flex;flex-direction:column;gap:16px;min-width:0;">
+          <p style="font-size:28px;line-height:1.2;color:#2c1a4d;">Boa tarde, Kátia!</p>
+          <p style="font-size:16px;line-height:1.5;color:#000000;">Você já percorreu <strong>70% da trilha do curso LGPD Play</strong> , continue assim!</p>
+        </div>
+        <img class="twinkle" src="assets/sparkle.svg" alt="" width="24" height="24" style="position:static;flex-shrink:0;animation-duration:3.2s;">
+      </div>
+
+      <section data-tour="licoes" class="card unit-card rise" style="--d:.1s;">
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <p style="font-weight:700;font-size:14px;line-height:1.5;color:#047b56;">Unidade 7</p>
+          <p style="font-size:20px;line-height:1.2;color:#000000;">Princípios Fundamentais da LGPD</p>
+          <p style="font-size:14px;line-height:1.5;color:#6c757d;">Aprenda como aplicar os princípios da LGPD em situações do seu dia-a-dia de trabalho.</p>
+        </div>
+        <div class="divider"></div>
+        <div class="tabs"><span class="tab off">Sobre</span><span class="tab on">Lições</span></div>
+
+        <div class="hl-lesson">
+          <div style="display:flex;align-items:center;gap:16px;min-width:0;">
+            <div class="lesson-ico" style="background:#047b56;"><i class="bi bi-volume-up-fill"></i></div>
+            <div style="min-width:0;">
+              <p class="lesson-title" style="font-weight:700;color:#047b56;">Podcast: Princípios Fundamentais da LGPD</p>
+              <div class="lesson-meta"><span class="tag tag-aprender">APRENDER</span><span class="lesson-sub">Do papel à prática</span></div>
+            </div>
+          </div>
+          <div class="lesson-right" style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
+            <span class="lesson-sub">3 min</span>
+            <x-import component-from-global-scope="LGPDPlayDesignSystem_cf0c13.Button" variant="primary" hint-size="auto,38px">Iniciar</x-import>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;">
+          <div class="lesson"><div class="lesson-ico" style="box-shadow:none;"><i class="bi bi-camera-video-fill"></i></div><div><p class="lesson-title">Vídeo: Bases Legais para o Tratamento</p><div class="lesson-meta"><span class="tag tag-aprender">APRENDER</span><span class="lesson-sub">Da teoria à prática</span></div></div></div>
+          <div class="lesson"><div class="lesson-ico"><i class="bi bi-patch-question-fill"></i></div><div><p class="lesson-title">Quiz: Conceitos Introdutórios da LGPD</p><div class="lesson-meta"><span class="tag tag-fixar">FIXAR</span><span class="lesson-sub">Exemplos e casos práticos</span></div></div></div>
+          <div class="lesson"><div class="lesson-ico"><i class="bi bi-file-earmark-text-fill"></i></div><div><p class="lesson-title">Artigo: Bases Legais para o Tratamento</p><div class="lesson-meta"><span class="tag tag-aprofundar">APROFUNDAR</span><span class="lesson-sub">Da teoria à prática</span></div></div></div>
+          <div class="lesson"><div class="lesson-ico"><i class="bi bi-chat-left-text-fill"></i></div><div><p class="lesson-title">Simulação: Direitos dos Titulares de Dados</p><div class="lesson-meta"><span class="tag tag-aplicar">APLICAR</span><span class="lesson-sub">Revisão e aplicação</span></div></div></div>
+        </div>
+        <span class="unit-badge" style="background:#f67416;min-width:122px;text-align:center;">Intermediário</span>
+      </section>
+
+      <section class="card unit-card rise" style="--d:.18s;background:#f4f4f5;">
+        <div style="display:flex;align-items:center;gap:24px;">
+          <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;">
+            <p style="font-weight:700;font-size:14px;line-height:1.5;color:#6c757d;">Unidade 8</p>
+            <p style="display:flex;align-items:center;gap:4px;font-size:20px;line-height:1.2;color:#6c757d;"><i class="bi bi-lock-fill" style="font-size:16px;"></i> Tratamento de Dados</p>
+            <p style="font-size:14px;line-height:1.5;color:#6c757d;">Aprenda como aplicar os princípios da LGPD em situações do seu dia-a-dia de trabalho.</p>
+          </div>
+          <button class="link-btn" style="font-weight:400;color:#047b56;padding:7px 13px;">Pular pra cá</button>
+        </div>
+        <div class="divider"></div>
+        <div class="tabs"><span class="tab off">Sobre</span><span class="tab on">Lições</span></div>
+        <div style="display:flex;flex-direction:column;">
+          <div class="lesson"><div class="lesson-ico"><i class="bi bi-patch-question-fill"></i></div><div><p class="lesson-title">Quiz: Conceitos Introdutórios da LGPD</p><p class="lesson-sub" style="margin-top:8px;">Exemplos e casos práticos</p></div></div>
+          <div class="lesson"><div class="lesson-ico"><i class="bi bi-file-earmark-text-fill"></i></div><div><p class="lesson-title">Artigo: Bases Legais para o Tratamento</p><p class="lesson-sub" style="margin-top:8px;">Da teoria à prática</p></div></div>
+          <div class="lesson"><div class="lesson-ico" style="box-shadow:none;"><i class="bi bi-camera-video-fill"></i></div><div><p class="lesson-title">Vídeo: Bases Legais para o Tratamento</p><p class="lesson-sub" style="margin-top:8px;">Da teoria à prática</p></div></div>
+          <div class="lesson"><div class="lesson-ico"><i class="bi bi-chat-left-text-fill"></i></div><div><p class="lesson-title">Simulação: Direitos dos Titulares de Dados</p><p class="lesson-sub" style="margin-top:8px;">Revisão e aplicação</p></div></div>
+        </div>
+        <span class="unit-badge" style="background:#ef4343;min-width:107px;text-align:center;">Avançado</span>
+      </section>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;min-width:0;">
+      <section class="card lift rise" style="--d:.06s;padding:24px;display:flex;flex-direction:column;gap:16px;">
+        <p style="font-size:20px;line-height:1.2;color:#212529;"><strong>Progresso</strong>&nbsp; Iniciante</p>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="flex:1;padding:8px 8px 9px;min-width:0;">
+            <div class="bar" style="height:24px;"><span class="stripes" style="width:20%;"></span></div>
+          </div>
+          <p style="font-size:20px;font-weight:700;line-height:1.2;color:#212529;">20%</p>
+        </div>
+      </section>
+
+      <section data-tour="conquistas" class="card lift rise" style="--d:.12s;padding:24px;display:flex;flex-direction:column;gap:24px;">
+        <div style="display:flex;align-items:center;gap:8px;"><p class="card-title" style="flex:1;">Conquistas</p><button class="link-btn">Ver tudo</button></div>
+        <div style="display:flex;align-items:center;gap:16px;padding:17px 19px;border:1px solid #e4ddff;border-radius:14px;background:linear-gradient(119deg,#f3f0ff 0%,#ffffff 100%);">
+          <div style="position:relative;flex-shrink:0;">
+            <div style="width:48px;height:48px;border-radius:24px;background:#cdeee1;color:#0a6e4c;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;box-shadow:0 0 0 3px #ffffff,0 0 0 6px #7620c1;">KO</div>
+            <span style="position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;border-radius:10px;background:#7620c1;border:2px solid #ffffff;display:flex;align-items:center;justify-content:center;"><i class="bi bi-trophy-fill" style="color:#ffffff;font-size:9px;line-height:1;"></i></span>
+          </div>
+          <div style="min-width:0;">
+            <p style="font-weight:700;font-size:15px;line-height:22.5px;color:#212529;">Moldura: Imbatível</p>
+            <p style="font-size:13px;line-height:19.5px;color:#6c757d;">Você detém 2 badges exclusivas</p>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:19px;">
+          <p style="font-size:16px;line-height:1.2;color:#6c757d;">Medalhas recentes</p>
+          <div style="display:flex;justify-content:space-between;gap:8px;">
+            <div class="pop" style="--d:.35s;"><div class="medal g-green"><i class="bi bi-flag-fill"></i></div></div>
+            <div class="pop" style="--d:.42s;"><div class="medal g-orange"><i class="bi bi-fire"></i></div></div>
+            <div class="pop" style="--d:.49s;"><div class="medal g-purple"><i class="bi bi-patch-check-fill"></i></div></div>
+            <div class="pop" style="--d:.56s;"><div class="medal g-green"><i class="bi bi-volume-up-fill"></i></div></div>
+            <div class="pop" style="--d:.63s;"><div class="medal g-orange"><i class="bi bi-lightning-charge-fill"></i></div></div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="bar" style="height:16px;flex:0 1 300px;"><span style="width:33%;"></span></div>
+            <p style="font-size:14px;line-height:1.5;color:#6c757d;white-space:nowrap;">6 de 13 medalhas</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card lift warm rise" style="--d:.18s;border-color:#fb923c;box-shadow:4px 4px 0 0 #b24624;padding-bottom:16px;">
+        <div style="background:#fff6eb;border:1px solid #f67416;border-radius:4px;padding:16px;margin:-1px -1px 0;">
+          <p style="font-size:16px;line-height:1.5;color:#b63c0b;">O dia está acabando, não esqueça de praticar!</p>
+        </div>
+        <div style="padding:16px 24px 8px;display:flex;flex-direction:column;gap:22px;">
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="display:flex;align-items:center;"><p class="card-title" style="flex:1;">Sequência</p><i class="bi bi-question-circle" style="font-size:16px;"></i></div>
+            <p style="font-weight:700;font-size:32px;line-height:1.2;color:#212529;">19 dias</p>
+            <p style="font-size:16px;line-height:1.5;color:#1a1a1a;">O seu recorde é de <strong>30 dias</strong></p>
+          </div>
+          <div style="display:flex;gap:24px;">
+            <div class="day"><img class="pop" src="assets/streak-check.svg" alt="" width="44" height="44" style="--d:.4s;margin:-6px;"><span class="day-lbl">S</span></div>
+            <div class="day"><img class="pop" src="assets/streak-check.svg" alt="" width="44" height="44" style="--d:.48s;margin:-6px;"><span class="day-lbl">T</span></div>
+            <div class="day"><img class="pop" src="assets/streak-check.svg" alt="" width="44" height="44" style="--d:.56s;margin:-6px;"><span class="day-lbl">Q</span></div>
+            <div class="day"><span class="day-box day-today" style="background:#ffedd6;border-color:#e4570c;display:flex;align-items:center;justify-content:center;color:#e4570c;"><i class="bi bi-exclamation" style="font-size:26px;line-height:1;"></i></span><span class="day-lbl">Q</span></div>
+            <div class="day"><span class="day-box"></span><span class="day-lbl" style="color:#a1a1aa;">S</span></div>
+            <div class="day"><span class="day-box"></span><span class="day-lbl" style="color:#a1a1aa;">S</span></div>
+            <div class="day"><span class="day-box"></span><span class="day-lbl" style="color:#a1a1aa;">D</span></div>
+          </div>
+          <div class="divider"></div>
+          <div style="display:flex;gap:24px;position:relative;">
+            <div class="mile" style="background:#f0fdf7;border:1px solid #047b56;position:relative;overflow:visible;"><b>7 d</b><span>+20 XP</span><img src="assets/streak-milestone-check.svg" alt="" width="24" height="24" style="position:absolute;right:-12px;top:-10px;"></div>
+            <div class="mile" style="background:#f0fdf7;border:1px solid #047b56;position:relative;overflow:visible;"><b>14 d</b><span>+30 XP</span><img src="assets/streak-milestone-check.svg" alt="" width="24" height="24" style="position:absolute;right:-12px;top:-10px;"></div>
+            <div class="mile" style="background:#ffffff;border:1px solid rgba(0,0,0,0.18);"><b>21 d</b><span>+50 XP</span></div>
+            <div class="mile" style="background:#ffffff;border:1px solid rgba(0,0,0,0.18);"><b>30 d</b><span>+100 XP</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section data-tour="ranking" class="card lift rise" style="--d:.24s;padding:24px;display:flex;flex-direction:column;gap:20px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;"><p class="card-title" style="color:#1a1a1a;">Ranking semanal</p><button class="link-btn">Ver tudo</button></div>
+        <div style="background:#dcebfe;height:104px;border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;">
+          <div style="width:48px;height:48px;border-radius:6.857px;background:#91c3fd;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-mortarboard-fill" style="font-size:20.5px;color:#173fab;"></i></div>
+          <div style="display:flex;flex-direction:column;gap:4px;">
+            <div style="display:flex;align-items:center;gap:8px;"><span style="font-weight:500;font-size:16px;line-height:1.5;color:#1a1a1a;">Liga Recruta</span><span style="background:#f8f9fa;border:1px solid #ced4da;border-radius:4px;padding:1px 8px;font-size:14px;line-height:1.5;">Nivel 1</span></div>
+            <div style="display:flex;align-items:center;gap:4px;font-size:12px;line-height:1.5;color:rgba(26,26,26,0.7);"><i class="bi bi-clock" style="font-size:12px;"></i> Reseta em 3 dias</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;padding:16px 0;">
+          <div class="rank-row"><span class="rank-pos">1</span><img class="rank-av" src="assets/avatar-ranking.png" alt=""><span class="rank-name">Ivan Berezko</span><span class="rank-xp">1.520 xp</span></div>
+          <div class="rank-row"><span class="rank-pos">2</span><img class="rank-av" src="assets/avatar-ranking.png" alt=""><span class="rank-name">Ivan Berezko</span><span class="rank-xp">900 xp</span></div>
+          <div class="rank-row"><span class="rank-pos">3</span><img class="rank-av" src="assets/avatar-ranking.png" alt=""><span class="rank-name">Ivan Berezko</span><span class="rank-xp">700 xp</span></div>
+          <div class="rank-row"><span class="rank-pos">4</span><img class="rank-av" src="assets/avatar-ranking.png" alt=""><span class="rank-name">Ivan Berezko</span><span class="rank-xp">300 xp</span></div>
+          <div style="display:flex;justify-content:center;padding:8px 0;"><i class="bi bi-three-dots" style="font-size:16px;"></i></div>
+          <div class="rank-row" style="background:#f2f7ff;"><span class="rank-pos">9</span><img class="rank-av" src="assets/avatar-ranking.png" alt=""><span class="rank-name">Ivan Berezko <span style="background:#3479e9;border:1px solid #bedbfe;border-radius:4px;padding:1px 8px;font-size:14px;line-height:1.5;color:#f2f7ff;">Você</span></span><span class="rank-xp">6 xp</span></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <sc-if value="{{ chatClosed }}" hint-placeholder-val="{{ true }}">
+    <button onClick="{{ openChat }}" class="lex-fab lex-orb" aria-label="Abrir a Lex, assistente de LGPD">
+      <img class="bob" src="assets/lex-happy.svg" alt="" width="46" height="46">
+    </button>
+  </sc-if>
+
+  <sc-if value="{{ chatOpen }}" hint-placeholder-val="{{ false }}">
+    <div data-tour="lex" class="lex-panel" role="dialog" aria-label="Lex, assistente de LGPD">
+      <div style="background:linear-gradient(90deg,#12b981 0%,#0c8f66 100%);padding:20px 16px 18px;display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;width:100%;">
+          <button class="lex-hbtn" aria-label="Histórico"><i class="bi bi-clock-history"></i></button>
+          <div class="lex-orb bob" style="width:64px;height:64px;"><img src="assets/lex-happy.svg" alt="" width="48" height="48"></div>
+          <button onClick="{{ closeChat }}" class="lex-hbtn" aria-label="Minimizar" style="font-size:15px;"><i class="bi bi-dash-lg"></i></button>
+        </div>
+        <p style="font-weight:600;font-size:17px;color:#ffffff;">Lex</p>
+      </div>
+      <div style="flex:1;min-height:0;background:#f8f9fb;padding:16px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;">
+        <div class="slide-up" style="--d:.15s;display:flex;flex-direction:column;align-items:flex-end;gap:4px;">
+          <div style="max-width:320px;background:#10b77f;color:#ffffff;border-radius:15px 15px 4px 15px;padding:10px 13px;font-size:13.5px;line-height:1.45;">Oi Lex! Voltei :) Tenho uma dúvida sobre retenção de dados de ex-funcionários.</div>
+          <div style="display:flex;gap:1px;"><button class="lex-act" aria-label="Reenviar"><i class="bi bi-arrow-repeat"></i></button><button class="lex-act" aria-label="Copiar"><i class="bi bi-copy"></i></button><button class="lex-act" aria-label="Editar"><i class="bi bi-pencil"></i></button></div>
+        </div>
+        <div class="slide-up" style="--d:.35s;display:flex;flex-direction:column;align-items:flex-start;gap:6px;">
+          <div style="max-width:320px;background:#ffffff;border:1px solid #e7ebf0;color:#2a3138;border-radius:15px 15px 15px 4px;padding:11px 13px;font-size:13.5px;line-height:1.5;">Que bom te ver de volta! Sobre o que você quer tirar dúvida hoje?</div>
+          <div style="display:flex;gap:1px;"><button class="lex-act" aria-label="Copiar"><i class="bi bi-copy"></i></button><button class="lex-act" aria-label="Gostei"><i class="bi bi-hand-thumbs-up"></i></button><button class="lex-act" aria-label="Não gostei"><i class="bi bi-hand-thumbs-down"></i></button><button class="lex-act" aria-label="Gerar de novo"><i class="bi bi-arrow-repeat"></i></button></div>
+        </div>
+      </div>
+      <div style="background:#ffffff;border-top:1px solid #eef1f4;padding:12px 14px;display:flex;flex-direction:column;gap:10px;flex-shrink:0;">
+        <div style="display:flex;align-items:center;gap:8px;padding:6px;background:#f1f3f6;border:1px solid #e3e7ec;border-radius:999px;">
+          <span style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#6c757d;font-size:16px;"><i class="bi bi-paperclip"></i></span>
+          <span style="flex:1;font-size:13.5px;color:#2a3138;">Digite sua dúvida sobre LGPD...</span>
+          <span style="width:34px;height:34px;border-radius:17px;background:#10b77f;display:flex;align-items:center;justify-content:center;color:#ffffff;font-size:16px;"><i class="bi bi-send"></i></span>
+        </div>
+        <p style="display:flex;align-items:center;gap:4px;font-size:10.5px;color:#adb5bd;"><i class="bi bi-info-circle-fill" style="font-size:10px;"></i> Anexe um documento (.txt ou .pdf, até 5 MB) para consulta.</p>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Tour -->
+  <sc-if value="{{ tourOn }}" hint-placeholder-val="{{ false }}">
+    <div class="spot" style="border-radius:{{ spotRadius }}px;top:{{ sy }}px;left:{{ sx }}px;width:{{ sw }}px;height:{{ sh }}px;box-shadow:{{ spotShadow }};opacity:{{ geoOpacity }};"></div>
+
+    <div ref="{{ popRef }}" class="tpop" role="dialog" aria-live="polite" aria-label="Tour guiado" style="top:{{ py }}px;left:{{ px }}px;width:{{ pw }}px;opacity:{{ geoOpacity }};">
+      <sc-if value="{{ hasArrow }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ arrowStyle }}"></div>
+      </sc-if>
+      <div class="{{ tpAnim }}">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <span class="tp-ico"><i class="bi {{ stepIcon }}"></i></span>
+          <span style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#047b56;flex:1;">Passo {{ stepNum }} de {{ stepTotal }}</span>
+          <button onClick="{{ pauseTour }}" aria-label="Fechar tour" title="Fechar (Esc)" style="width:30px;height:30px;border:none;background:transparent;border-radius:8px;color:#6c757d;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;" style-hover="background:#f1f3f5;color:#212529;"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div style="font-size:20px;font-weight:700;line-height:1.2;color:#212529;margin-bottom:6px;">{{ stepTitle }}</div>
+        <div style="font-size:15px;color:#495057;line-height:1.5;text-wrap:pretty;margin-bottom:16px;">{{ stepText }}</div>
+      </div>
+      <div style="display:flex;gap:4px;margin-bottom:16px;">
+        <sc-for list="{{ stepBars }}" as="b" hint-placeholder-count="6">
+          <button onClick="{{ b.go }}" aria-label="{{ b.label }}" class="tp-seg"><span style="transform:scaleX({{ b.fill }});"></span></button>
+        </sc-for>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button onClick="{{ skipTour }}" style="border:none;background:transparent;padding:6px 0;font:400 14px 'Roboto',sans-serif;color:#6c757d;cursor:pointer;text-decoration:underline;text-underline-offset:3px;" style-hover="color:#212529;">Pular tour</button>
+        <span class="hide-xs" style="display:flex;align-items:center;gap:3px;margin-left:6px;color:#adb5bd;"><span class="kbd">←</span><span class="kbd">→</span></span>
+        <div style="flex:1;"></div>
+        <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+          <x-import component-from-global-scope="LGPDPlayDesignSystem_cf0c13.Button" variant="secondary" outline="{{ true }}" size="sm" onClick="{{ prevStep }}" hint-size="auto,32px"><i class="bi bi-arrow-left"></i> Voltar</x-import>
+        </sc-if>
+        <x-import component-from-global-scope="LGPDPlayDesignSystem_cf0c13.Button" variant="primary" size="sm" onClick="{{ nextStep }}" hint-size="auto,32px">{{ nextLabel }}</x-import>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- Carrossel de apresentação -->
+  <sc-if value="{{ welcomeOpen }}" hint-placeholder-val="{{ false }}">
+    <div class="wc-overlay" onClick="{{ overlayClick }}">
+      <div ref="{{ wcRef }}" tabindex="-1" class="wc {{ wcDir }}" role="dialog" aria-modal="true" aria-roledescription="carrossel" aria-label="Apresentação do LGPD Play">
+        <div class="wc-stage {{ stageTone }}" style="background-color:{{ stageColor }};">
+          <div class="wc-top">
+            <div class="segs" role="tablist" aria-label="Slides">
+              <sc-for list="{{ segs }}" as="sg" hint-placeholder-count="6">
+                <button role="tab" aria-selected="{{ sg.cur }}" aria-label="{{ sg.label }}" onClick="{{ sg.go }}" class="seg {{ sg.cls }}"><span></span></button>
+              </sc-for>
+            </div>
+            <button onClick="{{ closeWelcome }}" class="wc-close" aria-label="Fechar apresentação"><i class="bi bi-x-lg"></i></button>
+          </div>
+
+          <!-- 0 · Boas-vindas -->
+          <sc-if value="{{ s0 }}" hint-placeholder-val="{{ true }}">
+            <div class="wc-scene">
+              <div class="pop" style="--d:.35s;position:absolute;left:12%;top:16%;"><div class="bubble-ico floaty" style="--r:-6deg;color:#047b56;"><i class="bi bi-journal-text"></i></div></div>
+              <div class="pop" style="--d:.45s;position:absolute;right:12%;top:12%;"><div class="bubble-ico floaty" style="--r:6deg;--fd:-1.2s;color:#1559ea;"><i class="bi bi-trophy-fill"></i></div></div>
+              <div class="pop hide-xs" style="--d:.55s;position:absolute;left:16%;bottom:10%;"><div class="bubble-ico floaty" style="--r:5deg;--fd:-2.1s;color:#e4570c;"><i class="bi bi-patch-check-fill"></i></div></div>
+              <div class="pop hide-xs" style="--d:.65s;position:absolute;right:15%;bottom:12%;"><div class="floaty" style="--fd:-.6s;"><div class="lex-orb" style="width:56px;height:56px;border:1px solid #202a36;box-shadow:3px 3px 0 #202a36;"><img src="assets/lex-happy.svg" alt="" width="40" height="40"></div></div></div>
+              <img class="twinkle" src="assets/sparkle.svg" alt="" width="22" height="22" style="--d:.2s;left:30%;top:22%;">
+              <img class="twinkle" src="assets/sparkle.svg" alt="" width="16" height="16" style="--d:1.1s;right:31%;bottom:18%;">
+              <img class="twinkle" src="assets/sparkle.svg" alt="" width="14" height="14" style="--d:1.8s;left:44%;bottom:10%;">
+              <div class="ink-card pop" style="--d:.1s;padding:20px 26px;display:flex;flex-direction:column;align-items:center;gap:14px;position:relative;z-index:2;">
+                <img src="assets/logo-tjam-play.svg" alt="TJAM Play" width="190" height="34">
+                <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
+                  <span class="tag tag-aprender pop" style="--d:.55s;font-size:12px;">APRENDER</span>
+                  <span class="tag tag-fixar pop" style="--d:.63s;font-size:12px;">FIXAR</span>
+                  <span class="tag tag-aprofundar pop" style="--d:.71s;font-size:12px;">APROFUNDAR</span>
+                  <span class="tag tag-aplicar pop" style="--d:.79s;font-size:12px;">APLICAR</span>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- 1 · Lições -->
+          <sc-if value="{{ s1 }}" hint-placeholder-val="{{ false }}">
+            <div class="wc-scene">
+              <div class="ink-card" style="width:min(440px,calc(100% - 40px));padding:12px;display:flex;flex-direction:column;gap:4px;">
+                <div class="slide-up hide-xs" style="--d:.05s;display:flex;align-items:center;justify-content:space-between;padding:2px 6px 6px;">
+                  <span style="font:700 12px 'Roboto',sans-serif;color:#047b56;letter-spacing:.04em;">UNIDADE 7 · PRINCÍPIOS DA LGPD</span>
+                  <span style="font-size:12px;color:#6c757d;">2 de 6</span>
+                </div>
+                <div class="m-row slide-up" style="--d:.15s;position:relative;">
+                  <div class="m-ico" style="background:#9eacc0;"><i class="bi bi-camera-video-fill"></i><span class="check-pop pop" style="--d:.7s;"><i class="bi bi-check-lg"></i></span></div>
+                  <div style="flex:1;min-width:0;"><p style="font-size:14px;color:#6c757d;text-decoration:line-through;text-decoration-color:rgba(108,117,125,.5);">Vídeo: Bases Legais</p><span class="tag tag-aprender" style="font-size:11px;display:inline-block;margin-top:5px;">APRENDER</span></div>
+                  <span class="xp-float"><span class="xp-chip">+20 XP</span></span>
+                  <span class="pop hide-xs" style="--d:.8s;font:600 12px 'Roboto',sans-serif;color:#047b56;">Concluída</span>
+                </div>
+                <div class="m-row slide-up" style="--d:.28s;background:#f0fdf7;box-shadow:0 0 0 3px rgba(16,183,127,.28);">
+                  <div class="m-ico" style="background:#047b56;"><span class="eq"><i></i><i></i><i></i><i></i></span></div>
+                  <div style="flex:1;min-width:0;"><p style="font-size:14px;font-weight:700;color:#047b56;">Podcast: Princípios da LGPD</p><div style="display:flex;align-items:center;gap:8px;margin-top:6px;"><span class="mini-bar"><span></span></span><span class="hide-xs" style="font-size:11px;color:#6c757d;">1:24 / 3:00</span></div></div>
+                  <span style="background:#10b77f;color:#fff;border-radius:6px;padding:6px 10px;font:700 12px 'Roboto',sans-serif;">Continuar</span>
+                </div>
+                <div class="m-row slide-up" style="--d:.41s;">
+                  <div class="m-ico" style="background:#9eacc0;"><i class="bi bi-patch-question-fill"></i></div>
+                  <div style="flex:1;min-width:0;"><p style="font-size:14px;color:#212529;">Quiz: Conceitos Introdutórios</p><span class="tag tag-fixar" style="font-size:11px;display:inline-block;margin-top:5px;">FIXAR</span></div>
+                  <span class="hide-xs" style="font-size:12px;color:#6c757d;">3 min</span>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- 2 · Ranking -->
+          <sc-if value="{{ s2 }}" hint-placeholder-val="{{ false }}">
+            <div class="wc-scene">
+              <div class="ink-card" style="width:min(420px,calc(100% - 40px));padding:12px 12px 10px;position:relative;">
+                <div class="slide-up" style="--d:.05s;display:flex;align-items:center;gap:10px;background:#dcebfe;border-radius:10px;padding:8px 10px;margin-bottom:8px;">
+                  <span style="width:32px;height:32px;border-radius:6px;background:#91c3fd;display:flex;align-items:center;justify-content:center;"><i class="bi bi-mortarboard-fill" style="color:#173fab;font-size:15px;"></i></span>
+                  <span style="font-weight:500;font-size:14px;">Liga Recruta</span><span style="background:#f8f9fa;border:1px solid #ced4da;border-radius:4px;padding:0 6px;font-size:12px;">Nivel 1</span>
+                  <span style="flex:1;"></span><span style="font-size:11px;color:rgba(26,26,26,.7);"><i class="bi bi-clock"></i> 3 dias</span>
+                </div>
+                <div class="rk-list">
+                  <span class="rk-num" style="top:0;">1</span><span class="rk-num" style="top:44px;">2</span><span class="rk-num" style="top:88px;">3</span><span class="rk-num" style="top:132px;">4</span>
+                  <div class="rk" style="top:0;animation:slideUp .45s var(--ease-out) .1s backwards;"><img class="rk-av" src="assets/avatar-ranking.png" alt=""><span class="rk-name">Sophia Mendes</span><span class="rk-xp">1.520 xp</span></div>
+                  <div class="rk" style="top:88px;--from:-44px;"><img class="rk-av" src="assets/avatar-ranking.png" alt=""><span class="rk-name">Ivan Berezko</span><span class="rk-xp">1.250 xp</span></div>
+                  <div class="rk" style="top:132px;--from:-44px;"><img class="rk-av" src="assets/avatar-ranking.png" alt=""><span class="rk-name">Ana Paula</span><span class="rk-xp">1.190 xp</span></div>
+                  <div class="rk me-row" style="top:44px;--from:88px;">
+                    <span class="rk-av" style="background:#cdeee1;color:#0a6e4c;display:flex;align-items:center;justify-content:center;font:700 10px 'Roboto',sans-serif;border-color:#7620c1;">KO</span>
+                    <span class="rk-name">Kátia <span style="background:#3479e9;border-radius:4px;padding:0 6px;font-size:11px;color:#fff;">Você</span><i class="bi bi-arrow-up-circle-fill pop" style="--d:1.75s;color:#10b77f;font-size:15px;"></i></span>
+                    <span class="rk-xp xp-count"></span>
+                    <span class="xp-float" style="right:64px;top:-6px;animation-delay:.25s;"><span class="xp-chip">+80 XP</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- 3 · Medalhas e badges -->
+          <sc-if value="{{ s3 }}" hint-placeholder-val="{{ false }}">
+            <div class="wc-scene" style="flex-direction:column;gap:22px;">
+              <div class="ink-card slide-up" style="--d:.05s;display:flex;align-items:center;gap:14px;padding:12px 16px;border-color:#202a36;background:linear-gradient(119deg,#f3f0ff 0%,#ffffff 100%);">
+                <div style="position:relative;width:44px;height:44px;flex-shrink:0;">
+                  <span class="ring-spin"></span>
+                  <span style="position:absolute;inset:-2px;border-radius:50%;background:#fff;"></span>
+                  <span style="position:absolute;inset:0;border-radius:50%;background:#cdeee1;color:#0a6e4c;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;">KO</span>
+                  <span style="position:absolute;right:-5px;bottom:-5px;width:18px;height:18px;border-radius:9px;background:#7620c1;border:2px solid #fff;display:flex;align-items:center;justify-content:center;"><i class="bi bi-trophy-fill" style="color:#fff;font-size:8px;line-height:1;"></i></span>
+                </div>
+                <div><p style="font-weight:700;font-size:14px;">Moldura: Imbatível</p><p style="font-size:12px;color:#6c757d;">Badge exclusiva · só você tem</p></div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px;">
+                <div class="pop" style="--d:.25s;"><div class="medal g-green" style="width:52px;height:52px;font-size:23px;"><i class="bi bi-flag-fill"></i></div></div>
+                <div class="pop" style="--d:.35s;"><div class="medal g-orange" style="width:52px;height:52px;font-size:23px;"><i class="bi bi-fire"></i></div></div>
+                <div class="pop" style="--d:.45s;"><div class="medal g-purple" style="width:52px;height:52px;font-size:23px;"><i class="bi bi-patch-check-fill"></i></div></div>
+                <div class="pop hide-xs" style="--d:.55s;"><div class="medal g-green" style="width:52px;height:52px;font-size:23px;"><i class="bi bi-volume-up-fill"></i></div></div>
+                <div class="unlock pop" style="--d:.65s;">
+                  <span class="burst"></span>
+                  <span class="confetti" style="--x:-44px;--y:-34px;background:#10b77f;"></span>
+                  <span class="confetti" style="--x:40px;--y:-38px;background:#f6c45a;"></span>
+                  <span class="confetti" style="--x:48px;--y:10px;background:#7b61ff;"></span>
+                  <span class="confetti" style="--x:-46px;--y:14px;background:#fd7e14;"></span>
+                  <span class="confetti" style="--x:-12px;--y:-50px;background:#dc3545;"></span>
+                  <span class="confetti" style="--x:18px;--y:44px;background:#3479e9;"></span>
+                  <div class="medal g-orange"><i class="bi bi-lightning-charge-fill"></i></div>
+                  <span class="locked"><i class="bi bi-lock-fill"></i></span>
+                  <span class="new-chip">NOVA!</span>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- 4 · Lex -->
+          <sc-if value="{{ s4 }}" hint-placeholder-val="{{ false }}">
+            <div class="wc-scene">
+              <div style="position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(52,209,155,.45) 0%,rgba(52,209,155,0) 65%);"></div>
+              <div class="slide-up" style="--d:.02s;width:min(390px,calc(100% - 40px));background:#f8f9fb;border:1px solid #202a36;border-radius:18px;box-shadow:4px 4px 0 #063d2b;overflow:hidden;font-family:'Inter',sans-serif;position:relative;">
+                <div style="background:linear-gradient(90deg,#12b981 0%,#0c8f66 100%);padding:9px 12px;display:flex;align-items:center;gap:9px;border-bottom:1px solid #202a36;">
+                  <div class="lex-orb bob" style="width:32px;height:32px;box-shadow:0 0 0 2px rgba(255,255,255,.35);"><img src="assets/lex-happy.svg" alt="" width="24" height="24"></div>
+                  <div><p style="font-weight:600;font-size:14px;color:#fff;line-height:1.1;">Lex</p><p style="font-size:11px;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:4px;"><span style="width:6px;height:6px;border-radius:50%;background:#b8ffdf;"></span> online</p></div>
+                </div>
+                <div style="padding:12px;display:flex;flex-direction:column;gap:8px;min-height:150px;">
+                  <div class="slide-up" style="--d:.3s;align-self:flex-end;max-width:84%;background:#10b77f;color:#fff;font-size:13px;line-height:1.4;padding:8px 12px;border-radius:15px 15px 4px 15px;">Posso enviar o CPF de um colega por e-mail?</div>
+                  <div style="position:relative;align-self:flex-start;max-width:88%;">
+                    <div class="typing"><i></i><i></i><i></i></div>
+                    <div class="slide-up" style="--d:2.05s;background:#fff;border:1px solid #e7ebf0;color:#2a3138;font-size:13px;line-height:1.4;padding:8px 12px;border-radius:15px 15px 15px 4px;">Só com finalidade legítima e usando o mínimo de dados necessário.</div>
+                  </div>
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <span class="qr pop" style="--d:2.45s;">Ver os cuidados</span>
+                    <span class="qr pop" style="--d:2.55s;">O que é base legal?</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- 5 · Tour -->
+          <sc-if value="{{ s5 }}" hint-placeholder-val="{{ false }}">
+            <div class="wc-scene">
+              <div class="mini-dash slide-up" style="--d:.02s;">
+                <div class="md" style="left:3%;top:10px;width:94%;height:18px;box-shadow:none;display:flex;align-items:center;gap:6px;padding:0 8px;"><span style="width:38px;height:6px;border-radius:2px;background:#0c1d55;"></span><span style="width:18px;height:5px;border-radius:2px;background:#10b77f;"></span><span style="width:18px;height:5px;border-radius:2px;background:#ced4da;"></span><span style="width:18px;height:5px;border-radius:2px;background:#ced4da;"></span><span style="flex:1;"></span><span style="width:20px;height:8px;border-radius:2px;background:#10b77f;"></span><span style="width:10px;height:8px;border-radius:2px;background:#dc3545;"></span></div>
+                <div class="md" style="left:3%;top:36px;width:58%;height:32px;border-color:#a046f6;background:linear-gradient(95deg,#faf5ff 0%,#f2e5ff 100%);"><div class="md-line" style="width:40%;background:#2c1a4d;opacity:.6;"></div></div>
+                <div class="md" style="left:3%;top:78px;width:58%;height:106px;"><div class="md-line" style="width:30%;background:#047b56;"></div><div class="md-line" style="width:60%;"></div><div style="margin:8px;height:22px;border-radius:5px;background:#f0fdf7;box-shadow:0 0 0 2px rgba(16,183,127,.3);"></div><div class="md-line" style="width:55%;"></div><div class="md-line" style="width:45%;"></div></div>
+                <div class="md" style="left:64%;top:36px;width:33%;height:32px;"><div class="md-line" style="width:50%;background:#212529;opacity:.6;"></div><div style="margin:5px 8px 0;height:5px;border-radius:3px;background:linear-gradient(90deg,#10b77f 30%,#e9ecef 30%);"></div></div>
+                <div class="md" style="left:64%;top:80px;width:33%;height:46px;"><div class="md-line" style="width:50%;background:#212529;opacity:.6;"></div><div style="display:flex;gap:4px;margin:7px 8px 0;"><span style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#f6c45a,#10b77f);"></span><span style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#f6c45a,#fd7e14);"></span><span style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#f6c45a,#7b61ff);"></span></div></div>
+                <div class="md" style="left:64%;top:138px;width:33%;height:46px;"><div class="md-line" style="width:50%;background:#212529;opacity:.6;"></div><div style="margin:6px 8px 0;height:12px;border-radius:4px;background:#dcebfe;"></div></div>
+                <div class="spot-mini"></div>
+                <div class="pop-mini"><span style="height:5px;width:60%;border-radius:3px;background:#212529;"></span><span style="height:4px;border-radius:3px;background:#dee2e6;"></span><span style="display:flex;justify-content:flex-end;"><span style="height:10px;width:34px;border-radius:3px;background:#10b77f;"></span></span></div>
+                <i class="bi bi-cursor-fill cursor"></i>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <div class="wc-body">
+          <div class="{{ copyAnim }}" aria-live="polite">
+            <span class="eyebrow" style="color:{{ eyebrowColor }};background:{{ eyebrowBg }};"><i class="bi {{ eyebrowIcon }}"></i> {{ eyebrowLabel }}</span>
+            <h2 class="wc-title">{{ slideTitle }}</h2>
+            <p class="wc-text">{{ slideText }}</p>
+          </div>
+          <div class="wc-foot">
+            <sc-if value="{{ notLastSlide }}" hint-placeholder-val="{{ true }}">
+              <button onClick="{{ skipToEnd }}" class="wc-skip">Pular apresentação</button>
+            </sc-if>
+            <div class="wc-spacer" style="flex:1;"></div>
+            <sc-if value="{{ canSlideBack }}" hint-placeholder-val="{{ false }}">
+              <x-import component-from-global-scope="LGPDPlayDesignSystem_cf0c13.Button" variant="secondary" outline="{{ true }}" onClick="{{ prevSlide }}" hint-size="auto,38px"><i class="bi bi-arrow-left"></i> Voltar</x-import>
+            </sc-if>
+            <sc-if value="{{ notLastSlide }}" hint-placeholder-val="{{ true }}">
+              <x-import component-from-global-scope="LGPDPlayDesignSystem_cf0c13.Button" variant="primary" onClick="{{ nextSlide }}" hint-size="auto,38px">Próximo <i class="bi bi-arrow-right"></i></x-import>
+            </sc-if>
+            <sc-if value="{{ isLastSlide }}" hint-placeholder-val="{{ false }}">
+              <x-import component-from-global-scope="LGPDPlayDesignSystem_cf0c13.Button" variant="secondary" outline="{{ true }}" onClick="{{ closeWelcome }}" hint-size="auto,38px">Explorar sozinho</x-import>
+              <x-import component-from-global-scope="LGPDPlayDesignSystem_cf0c13.Button" variant="primary" onClick="{{ startTourFromWelcome }}" hint-size="auto,38px"><i class="bi bi-signpost-split"></i> Fazer tour guiado</x-import>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
+    <div role="status" class="toast">
+      <span style="width:28px;height:28px;border-radius:50%;background:rgba(20,211,124,.16);display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi {{ toastIcon }}" style="color:#14d37c;font-size:14px;"></i></span>
+      <div style="font-size:12.5px;font-weight:500;color:#ffffff;line-height:1.4;padding-right:4px;">{{ toastMsg }}</div>
+      <sc-if value="{{ toastHasAction }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toastAction }}" style="border:none;background:#14d37c;color:#0c1d55;font:700 12.5px 'Inter',sans-serif;padding:6px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;" style-hover="background:#3ee29a;">{{ toastActionLabel }}</button>
+      </sc-if>
+      <button onClick="{{ hideToast }}" aria-label="Fechar" style="width:28px;height:28px;border:none;background:transparent;color:rgba(255,255,255,0.7);cursor:pointer;border-radius:999px;display:flex;align-items:center;justify-content:center;flex-shrink:0;" style-hover="background:rgba(255,255,255,0.12);"><i class="bi bi-x-lg" style="font-size:12px;"></i></button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;inicio&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Primeiro acesso&quot;,&quot;Tour guiado&quot;,&quot;Dashboard&quot;],&quot;default&quot;:&quot;Primeiro acesso&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;escurecer&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;autoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { welcome: false, slide: 0, dir: 'next', nav: 0, tour: false, step: 0, paused: null, profileMenu: false, chat: false, toast: null, geo: null, hint: false };
+  popRef = React.createRef();
+  wcRef = React.createRef();
+  SLIDES = [
+    { color: '#efe3ff', tone: '', eyebrow: 'Boas-vindas', icon: 'bi-stars', ec: '#7620c1', eb: '#f7f0ff', title: 'Boas-vindas ao LGPD Play', text: 'Aprenda a proteger dados pessoais com lições curtas, desafios e recompensas. Veja em menos de um minuto o que você vai encontrar.' },
+    { color: '#d4f4e6', tone: '', eyebrow: 'Lições', icon: 'bi-journal-text', ec: '#047b56', eb: '#f0fdf7', title: 'Lições curtas, no seu ritmo', text: 'Cada unidade reúne podcast, vídeo, quiz, artigo e simulação de poucos minutos. As etiquetas mostram o objetivo: aprender, fixar, aprofundar ou aplicar.' },
+    { color: '#dcebfe', tone: '', eyebrow: 'Ranking', icon: 'bi-trophy', ec: '#1559ea', eb: '#f2f7ff', title: 'Suba no ranking', text: 'Cada lição concluída vale XP. Dispute a liga semanal com pessoas do seu nível — o placar reseta toda semana, então sempre há uma nova chance.' },
+    { color: '#ffecd2', tone: '', eyebrow: 'Conquistas', icon: 'bi-patch-check', ec: '#e4570c', eb: '#fff6eb', title: 'Medalhas e badges', text: 'Medalhas são para todos e ficam com você para sempre. Badges são exclusivas — só uma pessoa detém cada uma — e viram molduras para o seu perfil.' },
+    { color: '#0c8f66', tone: 'dark', eyebrow: 'Assistente', icon: 'bi-chat-dots', ec: '#047b56', eb: '#f0fdf7', title: 'Tire dúvidas com a Lex', text: 'A Lex é a assistente do LGPD Play. Pergunte sobre a lei ou sobre situações do dia a dia, a qualquer momento e em qualquer tela.' },
+    { color: '#e3f6ee', tone: '', eyebrow: 'Tour guiado', icon: 'bi-signpost-split', ec: '#047b56', eb: '#f0fdf7', title: 'Quer um tour pela dashboard?', text: 'Em 6 passos rápidos mostramos onde fica cada coisa. Você pode pular a qualquer momento — e refazer depois pelo menu do seu perfil.' },
+  ];
+  STEPS = [
+    { target: 'nav', icon: 'bi-compass', noScroll: true, radius: 8, title: 'Menu principal', text: 'Navegue entre Início, Unidades, Desafio Semanal, Ranking e Amigos. Seu XP e suas vidas ficam sempre à direita.' },
+    { target: 'licoes', icon: 'bi-journal-text', radius: 20, title: 'Suas lições', text: 'Cada unidade reúne podcast, vídeo, quiz, artigo e simulação. As etiquetas mostram o objetivo de cada lição. Comece pela que está em destaque.' },
+    { target: 'ranking', icon: 'bi-trophy', radius: 16, title: 'Ranking semanal', text: 'Cada lição concluída vale XP. Dispute a liga da semana com pessoas do seu nível — o placar reseta toda semana.' },
+    { target: 'conquistas', icon: 'bi-patch-check', radius: 16, title: 'Medalhas e badges', text: 'Medalhas ficam com você para sempre. Badges são exclusivas — só uma pessoa detém cada uma — e viram molduras para o seu perfil.' },
+    { target: 'lex', icon: 'bi-chat-dots', noScroll: true, radius: 24, title: 'Converse com a Lex', text: 'Ficou com dúvida sobre a LGPD? A Lex responde a qualquer momento, sem sair da página. Você também pode anexar um documento para consulta.' },
+    { target: 'perfilmenu', icon: 'bi-person-gear', noScroll: true, radius: 16, title: 'Seu perfil e o tour', text: 'Aqui ficam as configurações do seu perfil e as referências. A apresentação e este tour também ficam sempre neste menu.' },
+  ];
+
+  componentDidMount() {
+    this.onKey = (e) => {
+      if (this.state.tour) {
+        if (e.key === 'ArrowRight') this.next();
+        else if (e.key === 'ArrowLeft') this.prev();
+        else if (e.key === 'Escape') this.pause();
+      } else if (this.state.welcome) {
+        if (e.key === 'ArrowRight') this.goSlide(this.state.slide + 1);
+        else if (e.key === 'ArrowLeft') this.goSlide(this.state.slide - 1);
+        else if (e.key === 'Escape') this.closeWelcome();
+      }
+    };
+    this.onMove = () => { if (this.state.tour) requestAnimationFrame(() => this.measure()); };
+    // Autoplay: the running story segment's CSS animation ending advances the carousel
+    // (hovering the dialog pauses the animation, and so the autoplay).
+    this.onAnimEnd = (e) => {
+      if (e.animationName !== 'segFill' || !this.state.welcome) return;
+      if (this.state.slide < this.SLIDES.length - 1) this.goSlide(this.state.slide + 1);
+    };
+    // Swipe on the stage.
+    this.onDown = (e) => { this.swipeX = e.target.closest && e.target.closest('.wc-stage') ? e.clientX : null; };
+    this.onUp = (e) => {
+      if (this.swipeX == null || !this.state.welcome) return;
+      const dx = e.clientX - this.swipeX; this.swipeX = null;
+      if (dx < -50) this.goSlide(this.state.slide + 1);
+      else if (dx > 50) this.goSlide(this.state.slide - 1);
+    };
+    window.addEventListener('keydown', this.onKey);
+    window.addEventListener('scroll', this.onMove, { passive: true });
+    window.addEventListener('resize', this.onMove);
+    document.addEventListener('animationend', this.onAnimEnd);
+    document.addEventListener('pointerdown', this.onDown);
+    document.addEventListener('pointerup', this.onUp);
+    this.applyStart();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKey);
+    window.removeEventListener('scroll', this.onMove);
+    window.removeEventListener('resize', this.onMove);
+    document.removeEventListener('animationend', this.onAnimEnd);
+    document.removeEventListener('pointerdown', this.onDown);
+    document.removeEventListener('pointerup', this.onUp);
+    clearTimeout(this.toastT);
+  }
+  lastInicio = undefined;
+  openWelcome() {
+    this.tourActive = false;
+    this.setState({ welcome: true, slide: 0, dir: 'next', profileMenu: false, tour: false });
+    setTimeout(() => this.wcRef.current && this.wcRef.current.focus(), 60);
+  }
+  closeWelcome() {
+    this.setState({ welcome: false, hint: true });
+    this.toast('Você pode rever a apresentação e fazer o tour pelo menu do seu perfil.', 'bi-info-circle-fill');
+  }
+  settle() {
+    this.ensureVisible();
+    requestAnimationFrame(() => this.measure());
+    setTimeout(() => this.measure(), 120);
+    setTimeout(() => this.measure(), 450);
+    setTimeout(() => this.measure(), 800);
+  }
+  goStep(i) { this.curStep = i; this.setState({ step: i, geo: null }); setTimeout(() => this.settle(), 30); }
+  applyStart() {
+    const s = this.props.inicio ?? 'Primeiro acesso';
+    if (s === 'Primeiro acesso') this.openWelcome();
+    else if (s === 'Tour guiado') this.startTour(0);
+    else { this.tourActive = false; this.setState({ welcome: false, tour: false }); }
+  }
+  el() {
+    const s = this.STEPS[this.curStep ?? this.state.step];
+    const el = document.querySelector('[data-tour="' + s.target + '"]');
+    // On narrow screens the nav links are hidden; highlight the whole bar instead.
+    if (el && el.offsetWidth === 0 && s.target === 'nav') return document.querySelector('.nav');
+    return el;
+  }
+  ensureVisible() {
+    const s = this.STEPS[this.curStep ?? this.state.step];
+    if (s.noScroll) return;
+    const el = this.el(); if (!el) return;
+    const r = el.getBoundingClientRect();
+    if (r.top < 88 || r.bottom > window.innerHeight - 16) {
+      window.scrollTo({ top: Math.max(0, window.scrollY + r.top - 96), behavior: 'smooth' });
+    }
+  }
+  measure() {
+    if (!this.tourActive) return;
+    const el = this.el(); if (!el) return;
+    const r = el.getBoundingClientRect();
+    const vw = window.innerWidth, vh = window.innerHeight, pad = 8, g = 16;
+    const t = { x: r.left - pad, y: r.top - pad, w: r.width + pad * 2, h: r.height + pad * 2 };
+    const W = Math.min(360, vw - 24);
+    const H = (this.popRef.current && this.popRef.current.offsetHeight) || 260;
+    const cx = t.x + t.w / 2, cy = t.y + t.h / 2;
+    const cl = (v, a, b) => Math.max(a, Math.min(b, v));
+    const fits = { bottom: t.y + t.h + g + H < vh - 8, top: t.y - g - H > 8, left: t.x - g - W > 8, right: t.x + t.w + g + W < vw - 8 };
+    const place = ['bottom', 'top', 'left', 'right'].find(p => fits[p]) || 'none';
+    let px, py, ax = 0, ay = 0;
+    if (place === 'bottom' || place === 'top') { px = cl(cx - W / 2, 12, vw - W - 12); py = place === 'bottom' ? t.y + t.h + g : t.y - g - H; ax = cl(cx - px, 20, W - 20); }
+    else if (place === 'left' || place === 'right') { py = cl(cy - H / 2, 12, vh - H - 12); px = place === 'left' ? t.x - g - W : t.x + t.w + g; ay = cl(cy - py, 20, H - 20); }
+    else { px = (vw - W) / 2; py = vh - H - 16; }
+    const R = Math.round;
+    const geo = { sx: R(t.x), sy: R(t.y), sw: R(t.w), sh: R(t.h), px: R(px), py: R(py), pw: R(W), place, ax: R(ax), ay: R(ay) };
+    if (JSON.stringify(geo) !== JSON.stringify(this.state.geo)) this.setState({ geo });
+  }
+  toast(msg, icon, actionLabel, action) {
+    clearTimeout(this.toastT);
+    this.setState({ toast: { msg, icon, actionLabel, action } });
+    this.toastT = setTimeout(() => this.setState({ toast: null }), 7000);
+  }
+  startTour(step) {
+    if (!step) window.scrollTo({ top: 0, behavior: 'smooth' });
+    clearTimeout(this.toastT);
+    this.tourActive = true; this.curStep = step || 0;
+    this.setState({ welcome: false, tour: true, step: step || 0, geo: null, profileMenu: false, chat: false, paused: null, toast: null, hint: false });
+    setTimeout(() => this.settle(), 30);
+    requestAnimationFrame(() => this.measure());
+  }
+  next() {
+    if (this.state.step < this.STEPS.length - 1) this.goStep(this.state.step + 1);
+    else { this.tourActive = false; this.setState({ tour: false, paused: null }); this.toast('Tour concluído! Você pode refazê-lo pelo menu do seu perfil.', 'bi-check-circle-fill', 'Refazer', () => this.startTour(0)); }
+  }
+  prev() { if (this.state.step > 0) this.goStep(this.state.step - 1); }
+  pause() {
+    const p = this.state.step;
+    this.tourActive = false;
+    this.setState({ tour: false, paused: p, hint: true });
+    this.toast('Tour pausado no passo ' + (p + 1) + ' de ' + this.STEPS.length + '.', 'bi-pause-circle-fill', 'Continuar', () => this.startTour(p));
+  }
+  skip() {
+    this.tourActive = false;
+    this.setState({ tour: false, paused: null, hint: true });
+    this.toast('Tour encerrado. Ele fica disponível no menu do seu perfil.', 'bi-info-circle-fill', 'Refazer', () => this.startTour(0));
+  }
+  goSlide(i) {
+    if (i < 0 || i >= this.SLIDES.length || i === this.state.slide) return;
+    this.setState(x => ({ slide: i, dir: i > x.slide ? 'next' : 'prev', nav: x.nav + 1 }));
+  }
+
+  renderVals() {
+    const st = this.state;
+    const ini = this.props.inicio ?? 'Primeiro acesso';
+    if (this.lastInicio !== undefined && this.lastInicio !== ini) setTimeout(() => this.applyStart(), 0);
+    this.lastInicio = ini;
+    if (st.tour && !st.geo && this.pendingStep !== st.step) { this.pendingStep = st.step; setTimeout(() => { this.pendingStep = null; this.measure(); }, 60); }
+    const dim = this.props.escurecer ?? true;
+    const autoplay = this.props.autoplay ?? true;
+    const N = this.STEPS.length;
+    const s = this.STEPS[st.step];
+    const g = st.geo;
+    let arrowStyle = '';
+    if (g && g.place !== 'none') {
+      const base = 'position:absolute;width:14px;height:14px;background:#ffffff;transform:rotate(45deg);border:1px solid #202a36;';
+      if (g.place === 'bottom') arrowStyle = base + 'top:-8px;left:' + (g.ax - 7) + 'px;border-right:none;border-bottom:none;';
+      if (g.place === 'top') arrowStyle = base + 'bottom:-8px;left:' + (g.ax - 7) + 'px;border-left:none;border-top:none;';
+      if (g.place === 'left') arrowStyle = base + 'right:-8px;top:' + (g.ay - 7) + 'px;border-left:none;border-bottom:none;';
+      if (g.place === 'right') arrowStyle = base + 'left:-8px;top:' + (g.ay - 7) + 'px;border-right:none;border-top:none;';
+    }
+    const tourTarget = st.tour ? s.target : null;
+    const profileOpen = st.profileMenu || tourTarget === 'perfilmenu';
+    const chatOpen = st.chat || tourTarget === 'lex';
+    const toast = st.toast;
+    const SL = this.SLIDES, last = SL.length - 1, cur = SL[st.slide];
+    return {
+      profileOpen, chevronRot: profileOpen ? 180 : 0,
+      helpHint: st.hint && !profileOpen,
+      menuBackdrop: st.profileMenu,
+      closeMenus: () => this.setState({ profileMenu: false }),
+      toggleProfile: () => this.setState(x => ({ profileMenu: !x.profileMenu, hint: false })),
+      tourMenuLabel: st.paused != null ? 'Continuar tour · passo ' + (st.paused + 1) + ' de ' + N : 'Fazer tour guiado',
+      tourFromMenu: () => this.startTour(st.paused != null ? st.paused : 0),
+      openWelcome: () => this.openWelcome(),
+
+      chatOpen, chatClosed: !chatOpen,
+      openChat: () => this.setState({ chat: true }),
+      closeChat: () => { if (st.tour && tourTarget === 'lex') this.next(); else this.setState({ chat: false }); },
+
+      tourOn: st.tour,
+      popRef: this.popRef,
+      tpAnim: st.step % 2 ? 'tp-a' : 'tp-b',
+      geoOpacity: g ? 1 : 0,
+      sx: g ? g.sx : 0, sy: g ? g.sy : 0, sw: g ? g.sw : 0, sh: g ? g.sh : 0,
+      px: g ? g.px : 0, py: g ? g.py : 0, pw: g ? g.pw : 360,
+      spotRadius: s.radius || 16,
+      spotShadow: '0 0 0 3px #10b77f' + (dim ? ', 0 0 0 9999px rgba(32,42,54,0.55)' : ''),
+      hasArrow: !!arrowStyle, arrowStyle,
+      stepIcon: s.icon, stepTitle: s.title, stepText: s.text,
+      stepNum: st.step + 1, stepTotal: N,
+      stepBars: this.STEPS.map((_, i) => ({ fill: i <= st.step ? 1 : 0, label: 'Ir para o passo ' + (i + 1), go: () => this.goStep(i) })),
+      canBack: st.step > 0,
+      nextLabel: st.step === N - 1 ? 'Concluir' : 'Próximo',
+      nextStep: () => this.next(), prevStep: () => this.prev(),
+      pauseTour: () => this.pause(), skipTour: () => this.skip(),
+
+      welcomeOpen: st.welcome,
+      wcRef: this.wcRef,
+      wcDir: 'enter-' + st.dir,
+      copyAnim: st.nav % 2 ? 'copy-a' : 'copy-b',
+      overlayClick: (e) => { if (e.target === e.currentTarget) this.closeWelcome(); },
+      stageColor: cur.color, stageTone: cur.tone,
+      eyebrowLabel: cur.eyebrow, eyebrowIcon: cur.icon, eyebrowColor: cur.ec, eyebrowBg: cur.eb,
+      slideTitle: cur.title, slideText: cur.text,
+      s0: st.slide === 0, s1: st.slide === 1, s2: st.slide === 2, s3: st.slide === 3, s4: st.slide === 4, s5: st.slide === 5,
+      segs: SL.map((_, i) => ({
+        cls: i < st.slide || (i === st.slide && (i === last || !autoplay)) ? 'done' : (i === st.slide ? 'run' : ''),
+        cur: i === st.slide, label: 'Ir para o slide ' + (i + 1) + ' de ' + SL.length, go: () => this.goSlide(i),
+      })),
+      canSlideBack: st.slide > 0,
+      notLastSlide: st.slide < last,
+      isLastSlide: st.slide === last,
+      nextSlide: () => this.goSlide(st.slide + 1),
+      prevSlide: () => this.goSlide(st.slide - 1),
+      skipToEnd: () => this.goSlide(last),
+      closeWelcome: () => this.closeWelcome(),
+      startTourFromWelcome: () => this.startTour(0),
+
+      toastOn: !!toast,
+      toastMsg: toast ? toast.msg : '',
+      toastIcon: toast ? toast.icon : 'bi-info-circle-fill',
+      toastHasAction: !!(toast && toast.action),
+      toastActionLabel: toast ? toast.actionLabel : '',
+      toastAction: () => { const a = toast && toast.action; this.setState({ toast: null }); if (a) a(); },
+      hideToast: () => this.setState({ toast: null }),
+    };
+  }
+}
+</script>
+</body>
+</html>

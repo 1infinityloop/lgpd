@@ -1,0 +1,10 @@
+/* ============================================================
+   LGPD Play Design System — global CSS entry point
+   Bootstrap 5.3 foundations, themed for LGPD Play.
+   Consumers link THIS file. Imports only.
+   ============================================================ */
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/base.css";
+@import "./components/fig-tokens.css";

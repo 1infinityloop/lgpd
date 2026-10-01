@@ -1,0 +1,39 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="128" height="16" viewBox="0 0 128 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="_progress/striped" opacity="0.15" clip-path="url(#clip0_0_124)">
+<g id="striped-pattern">
+<path d="M-16 0L-7.99973 4.80904e-06L8 16L0 16L-16 0Z" fill="white"/>
+<path d="M8.00027 4.80904e-06L0 0L16 16L24 16L8.00027 4.80904e-06Z" fill="white"/>
+<path d="M24.0003 4.80904e-06L16 0L32 16L40 16L24.0003 4.80904e-06Z" fill="white"/>
+<path d="M40.0003 4.80904e-06L32 0L48 16L56 16L40.0003 4.80904e-06Z" fill="white"/>
+<path d="M56.0003 4.80904e-06L48 0L64 16L72 16L56.0003 4.80904e-06Z" fill="white"/>
+<path d="M72.0003 4.80904e-06L64 0L80 16L88 16L72.0003 4.80904e-06Z" fill="white"/>
+<path d="M88.0003 4.80904e-06L80 0L96 16L104 16L88.0003 4.80904e-06Z" fill="white"/>
+<path d="M104 4.80904e-06L96 0L112 16L120 16L104 4.80904e-06Z" fill="white"/>
+<path d="M120 4.80904e-06L112 0L128 16L136 16L120 4.80904e-06Z" fill="white"/>
+<path d="M136 4.80904e-06L128 0L144 16L152 16L136 4.80904e-06Z" fill="white"/>
+<path d="M152 4.80904e-06L144 0L160 16L168 16L152 4.80904e-06Z" fill="white"/>
+<path d="M168 4.80904e-06L160 0L176 16L184 16L168 4.80904e-06Z" fill="white"/>
+<path d="M184 4.80904e-06L176 0L192 16L200 16L184 4.80904e-06Z" fill="white"/>
+<path d="M200 4.80904e-06L192 0L208 16L216 16L200 4.80904e-06Z" fill="white"/>
+<path d="M216 4.80904e-06L208 0L224 16L232 16L216 4.80904e-06Z" fill="white"/>
+<path d="M224 0L232 4.80904e-06L248 16L240 16L224 0Z" fill="white"/>
+<path d="M240 0L248 4.80904e-06L264 16L256 16L240 0Z" fill="white"/>
+<path d="M264 4.80904e-06L256 0L272 16L280 16L264 4.80904e-06Z" fill="white"/>
+<path d="M280 4.80904e-06L272 0L288 16L296 16L280 4.80904e-06Z" fill="white"/>
+<path d="M296 4.80904e-06L288 0L304 16L312 16L296 4.80904e-06Z" fill="white"/>
+<path d="M312 4.80904e-06L304 0L320 16L328 16L312 4.80904e-06Z" fill="white"/>
+<path d="M328 4.80904e-06L320 0L336 16L344 16L328 4.80904e-06Z" fill="white"/>
+<path d="M344 4.80904e-06L336 0L352 16L360 16L344 4.80904e-06Z" fill="white"/>
+<path d="M360 4.80904e-06L352 0L368 16L376 16L360 4.80904e-06Z" fill="white"/>
+<path d="M376 4.80904e-06L368 0L384 16L392 16L376 4.80904e-06Z" fill="white"/>
+<path d="M392 4.80904e-06L384 0L400 16L408 16L392 4.80904e-06Z" fill="white"/>
+<path d="M408 4.80904e-06L400 0L416 16L424 16L408 4.80904e-06Z" fill="white"/>
+<path d="M424 4.80904e-06L416 0L432 16L440 16L424 4.80904e-06Z" fill="white"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_124">
+<rect width="128" height="16" fill="white"/>
+</clipPath>
+</defs>
+</svg>

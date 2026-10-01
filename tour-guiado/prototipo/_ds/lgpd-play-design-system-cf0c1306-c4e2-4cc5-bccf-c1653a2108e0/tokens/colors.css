@@ -1,0 +1,113 @@
+/* ============================================================
+   LGPD Play — Color tokens
+   Bootstrap 5.3 palette, themed with the LGPD Play green primary.
+   Base palette + grayscale + semantic theme colors + subtle scales.
+   ============================================================ */
+:root {
+  /* ---- Brand ---- */
+  --lgpd-green: #10b77f;          /* primary — theme green */
+  --lgpd-green-bright: #14d37c;   /* logo shield gradient top */
+  --lgpd-navy: #0c1d55;           /* logo wordmark navy */
+  --lgpd-purple: #7b61ff;         /* accent (UI-kit highlight) */
+
+  /* ---- Base palette ---- */
+  --bs-blue:   #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink:   #d63384;
+  --bs-red:    #dc3545;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #ffc107;
+  --bs-green:  #198754;
+  --bs-teal:   #20c997;
+  --bs-cyan:   #0dcaf0;
+  --bs-white:  #ffffff;
+  --bs-black:  #000000;
+
+  /* ---- Grayscale ---- */
+  --bs-gray-100: #f8f9fa;
+  --bs-gray-200: #e9ecef;
+  --bs-gray-300: #dee2e6;
+  --bs-gray-400: #ced4da;
+  --bs-gray-500: #adb5bd;
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
+
+  /* ---- Theme colors (semantic) ---- */
+  --bs-primary:   #10b77f;  /* LGPD green */
+  --bs-secondary: #6c757d;
+  --bs-success:   #198754;
+  --bs-danger:    #dc3545;
+  --bs-warning:   #ffc107;
+  --bs-info:      #0dcaf0;
+  --bs-light:     #f8f9fa;
+  --bs-dark:      #212529;
+
+  /* ---- Theme RGB triplets (for rgba() use, e.g. focus rings) ---- */
+  --bs-primary-rgb:   16,183,127;   /* @kind color */
+  --bs-secondary-rgb: 108,117,125;  /* @kind color */
+  --bs-success-rgb:   25,135,84;    /* @kind color */
+  --bs-danger-rgb:    220,53,69;    /* @kind color */
+  --bs-warning-rgb:   255,193,7;    /* @kind color */
+  --bs-info-rgb:      13,202,240;   /* @kind color */
+  --bs-light-rgb:     248,249,250;  /* @kind color */
+  --bs-dark-rgb:      33,37,41;     /* @kind color */
+  --bs-white-rgb:     255,255,255;  /* @kind color */
+  --bs-black-rgb:     0,0,0;        /* @kind color */
+  --bs-body-color-rgb: 33,37,41;    /* @kind color */
+  --bs-body-bg-rgb:    255,255,255; /* @kind color */
+
+  /* ---- Subtle / emphasis scales (light mode) ---- */
+  --bs-primary-text-emphasis:   #0a6e4c;
+  --bs-secondary-text-emphasis: #2b2f32;
+  --bs-success-text-emphasis:   #0f5132;
+  --bs-danger-text-emphasis:    #842029;
+  --bs-warning-text-emphasis:   #664d03;
+  --bs-info-text-emphasis:      #055160;
+
+  --bs-primary-bg-subtle:   #cff1e5;
+  --bs-secondary-bg-subtle: #e2e3e5;
+  --bs-success-bg-subtle:   #d1e7dd;
+  --bs-danger-bg-subtle:    #f8d7da;
+  --bs-warning-bg-subtle:   #fff3cd;
+  --bs-info-bg-subtle:      #cff4fc;
+  --bs-light-bg-subtle:     #fcfcfd;
+  --bs-dark-bg-subtle:      #ced4da;
+
+  --bs-primary-border-subtle:   #9fe3cc;
+  --bs-secondary-border-subtle: #c4c8cb;
+  --bs-success-border-subtle:   #a3cfbb;
+  --bs-danger-border-subtle:    #f1aeb5;
+  --bs-warning-border-subtle:   #ffe69c;
+  --bs-info-border-subtle:      #9eeaf9;
+
+  /* ---- Body & surface (semantic aliases) ---- */
+  --bs-body-color:      #212529;
+  --bs-body-bg:         #ffffff;
+  --bs-emphasis-color:  #000000;
+  --bs-secondary-color: rgba(33,37,41,.75);
+  --bs-secondary-bg:    #e9ecef;
+  --bs-tertiary-color:  rgba(33,37,41,.5);
+  --bs-tertiary-bg:     #f8f9fa;
+
+  --bs-border-color:        #dee2e6;
+  --bs-border-color-translucent: rgba(0,0,0,.175);
+
+  /* ---- Links ---- */
+  --bs-link-color:       var(--bs-primary);
+  --bs-link-color-rgb:   var(--bs-primary-rgb);     /* @kind color */
+  --bs-link-hover-color: #0d9266;       /* primary shaded 20% */
+  --bs-link-hover-color-rgb: 13,146,102;           /* @kind color */
+
+  /* ---- Focus ring ---- */
+  --bs-focus-ring-color: rgba(var(--bs-primary-rgb), .25);
+
+  /* ---- Surface helpers used by components ---- */
+  --surface-card:     var(--bs-white);
+  --surface-sunken:   var(--bs-gray-100);
+  --surface-overlay:  var(--bs-white);
+  --text-body:        var(--bs-body-color);
+  --text-muted:       var(--bs-gray-600);
+}

@@ -1,0 +1,61 @@
+/* ============================================================
+   LGPD Play — Base element defaults (Reboot-lite)
+   Applies body type, headings, links, code using the tokens.
+   ============================================================ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
+  line-height: var(--bs-body-line-height);
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 0.5rem;
+  font-weight: var(--bs-heading-font-weight);
+  line-height: var(--bs-heading-line-height);
+  color: inherit;
+}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+h4 { font-size: var(--fs-h4); }
+h5 { font-size: var(--fs-h5); }
+h6 { font-size: var(--fs-h6); }
+
+p { margin: 0 0 1rem; }
+
+a {
+  color: var(--bs-link-color);
+  text-decoration: underline;
+  text-underline-offset: 0.125em;
+}
+a:hover { color: var(--bs-link-hover-color); }
+
+small { font-size: var(--fs-small); }
+
+code, kbd, pre, samp {
+  font-family: var(--bs-font-monospace);
+  font-size: var(--fs-code);
+}
+code { color: var(--bs-pink); }
+
+hr {
+  margin: 1rem 0;
+  border: 0;
+  border-top: var(--bs-border-width) solid var(--bs-border-color);
+  opacity: 1;
+}
+
+:focus-visible {
+  outline: 0;
+  box-shadow: var(--bs-focus-ring);
+}

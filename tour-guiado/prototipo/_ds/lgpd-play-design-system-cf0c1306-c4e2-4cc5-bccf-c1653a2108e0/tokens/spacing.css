@@ -1,0 +1,64 @@
+/* ============================================================
+   LGPD Play — Spacing, radius, borders, shadows, layout tokens
+   Bootstrap 5 spacer scale (base 1rem) + 4px micro-grid.
+   ============================================================ */
+:root {
+  /* ---- Spacer scale (Bootstrap 0–5) ---- */
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4px  */
+  --space-2: 0.5rem;   /* 8px  */
+  --space-3: 1rem;     /* 16px */
+  --space-4: 1.5rem;   /* 24px */
+  --space-5: 3rem;     /* 48px */
+  --spacer: 1rem;
+
+  /* ---- Gutters ---- */
+  --bs-gutter-x: 1.5rem;  /* @kind spacing */
+  --bs-gutter-y: 0;       /* @kind spacing */
+
+  /* ---- Border ---- */
+  --bs-border-width: 1px;
+  --bs-border-style: solid;  /* @kind other */
+
+  /* ---- Radius ---- */
+  --bs-border-radius:     0.375rem;  /* 6px  — default */
+  --bs-border-radius-sm:  0.25rem;   /* 4px  */
+  --bs-border-radius-lg:  0.5rem;    /* 8px  */
+  --bs-border-radius-xl:  1rem;      /* 16px */
+  --bs-border-radius-xxl: 2rem;      /* 32px */
+  --bs-border-radius-pill: 50rem;
+
+  /* ---- Shadows ---- */
+  --bs-box-shadow:       0 0.5rem 1rem rgba(0,0,0,.15);
+  --bs-box-shadow-sm:    0 0.125rem 0.25rem rgba(0,0,0,.075);
+  --bs-box-shadow-lg:    0 1rem 3rem rgba(0,0,0,.175);
+  --bs-box-shadow-inset: inset 0 1px 2px rgba(0,0,0,.075);
+
+  /* ---- Focus ring geometry ---- */
+  --bs-focus-ring-width: 0.25rem;
+  --bs-focus-ring: 0 0 0 var(--bs-focus-ring-width) var(--bs-focus-ring-color);  /* @kind shadow */
+
+  /* ---- Z-index scale ---- */
+  --z-dropdown: 1000;   /* @kind other */
+  --z-sticky:   1020;   /* @kind other */
+  --z-fixed:    1030;   /* @kind other */
+  --z-offcanvas-backdrop: 1040; /* @kind other */
+  --z-offcanvas: 1045;  /* @kind other */
+  --z-modal-backdrop: 1050; /* @kind other */
+  --z-modal:    1055;   /* @kind other */
+  --z-popover:  1070;   /* @kind other */
+  --z-tooltip:  1080;   /* @kind other */
+  --z-toast:    1090;   /* @kind other */
+
+  /* ---- Transitions ---- */
+  --transition-base:  all .15s ease-in-out;        /* @kind other */
+  --transition-fade:  opacity .15s linear;         /* @kind other */
+  --transition-collapse: height .35s ease;         /* @kind other */
+
+  /* ---- Container max widths ---- */
+  --container-sm:  540px;  /* @kind other */
+  --container-md:  720px;  /* @kind other */
+  --container-lg:  960px;  /* @kind other */
+  --container-xl:  1140px; /* @kind other */
+  --container-xxl: 1320px; /* @kind other */
+}

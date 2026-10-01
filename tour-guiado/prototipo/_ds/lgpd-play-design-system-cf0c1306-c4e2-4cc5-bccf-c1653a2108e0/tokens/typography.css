@@ -1,0 +1,59 @@
+/* ============================================================
+   LGPD Play — Typography tokens
+   Bootstrap 5 native font stack (system fonts) + RFS type scale.
+   ============================================================ */
+:root {
+  /* ---- Font families ---- */
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --bs-body-font-family: var(--bs-font-sans-serif);
+
+  /* ---- Body text ---- */
+  --bs-body-font-size: 1rem;       /* 16px */
+  --bs-body-font-weight: 400;
+  --bs-body-line-height: 1.5;
+
+  /* ---- Font weights ---- */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* ---- Heading scale (weight 500, line-height 1.2) ---- */
+  --bs-heading-font-weight: 500;
+  --bs-heading-line-height: 1.2;
+  --fs-h1: 2.5rem;    /* 40px */
+  --fs-h2: 2rem;      /* 32px */
+  --fs-h3: 1.75rem;   /* 28px */
+  --fs-h4: 1.5rem;    /* 24px */
+  --fs-h5: 1.25rem;   /* 20px */
+  --fs-h6: 1rem;      /* 16px */
+
+  /* ---- Display headings (weight 300, line-height 1.2) ---- */
+  --fs-display-1: 5rem;     /* 80px */
+  --fs-display-2: 4.5rem;   /* 72px */
+  --fs-display-3: 4rem;     /* 64px */
+  --fs-display-4: 3.5rem;   /* 56px */
+  --fs-display-5: 3rem;     /* 48px */
+  --fs-display-6: 2.5rem;   /* 40px */
+  --display-font-weight: 300;
+
+  /* ---- Utility sizes ---- */
+  --fs-lead: 1.25rem;       /* 20px, weight 300 */
+  --fs-small: 0.875rem;     /* 14px */
+  --fs-code: 0.875em;
+}
+
+/* ---- Specimen helpers (used by guideline cards & docs) ---- */
+.t-display { font-size: var(--fs-display-4); font-weight: var(--display-font-weight); line-height: 1.2; }
+.t-h1 { font-size: var(--fs-h1); font-weight: var(--bs-heading-font-weight); line-height: 1.2; }
+.t-h2 { font-size: var(--fs-h2); font-weight: var(--bs-heading-font-weight); line-height: 1.2; }
+.t-h3 { font-size: var(--fs-h3); font-weight: var(--bs-heading-font-weight); line-height: 1.2; }
+.t-lead { font-size: var(--fs-lead); font-weight: var(--font-weight-light); }
+.t-body { font-size: var(--bs-body-font-size); font-weight: var(--font-weight-normal); line-height: 1.5; }
+.t-small { font-size: var(--fs-small); }
+.t-mono { font-family: var(--bs-font-monospace); }
